@@ -1,24 +1,41 @@
+###############################################
+# Project Serendib — Python dependencies
+#
+# This file is the single source of truth for:
+# - Runtime dependencies for dataset / tooling.
+# - Optional ecosystem packages used for training/eval.
+# - Dev-only tooling (tests, linting, etc.).
+#
+# Recommended install (see DEV_ENV.md for details):
+#   1. Create/activate venv with `uv venv` + activation.
+#   2. Install all deps with:
+#        uv pip install -r requirements.txt
+#
+# Avoid editing this file via `pip freeze` — we keep it
+# structured and commented instead of mirroring the venv.
+###############################################
+
 # Minimal runtime requirements for dataset tooling.
-# For dev tooling, install optional deps: `pip install -e ".[dev]"` (if using pyproject).
 jsonschema>=4.22.0
 tqdm>=4.66.0
 
-# Common ecosystem packages (optional for training/eval workflows)
+# Common ecosystem packages (optional for training/eval workflows).
 datasets>=2.20.0
 transformers>=4.43.0
 accelerate>=0.33.0
 peft>=0.12.0
 trl>=0.9.6
 
-# Proposal OCR utilities (optional; required if using scripts/ocr_proposal.py)
+# Proposal OCR utilities (optional; required if using scripts/ocr_proposal.py).
 pymupdf>=1.24.0
 pillow>=10.4.0
 pytesseract>=0.3.10
 
-# Dev
+# Dev tooling (installed in the project venv; you may also
+# choose to install these globally via `uv tool` or `pipx`).
 pytest>=8.2.0
 ruff>=0.6.0
 
-# Argilla (optional)
+# Argilla / Gradio (optional; used for data labeling and demos).
 argilla>=2.4.0
 gradio>=4.44.0

@@ -11,6 +11,17 @@ Sri Lanka’s open **sovereign instruction dataset** initiative — building `La
 - **`argilla/`**: Student verification workflows (Hugging Face Space-ready scaffold).
 - **`PROPOSAL.md`**: OCR transcription of the proposal for easy reference.
 
+## Current focus: Teacher workflows (v0.1)
+
+We are starting with a teacher-assistant slice aimed at helping Sri Lanka school teachers with day-to-day work:
+
+- Classroom management + pedagogy
+- Low-resource teaching aids
+- Exam prep
+- Remediation / differentiation
+
+See `data/teachers_v0_1/`.
+
 ## Executive summary (to be derived from the proposal)
 
 The proposal PDF for Project Serendib is **image-based**. We OCR’d it into `proposal_ocr.txt` (repo file) to extract the content below.

@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/project-serendib/lanka-instruct-v1.schema.json",
+  "title": "Lanka-Instruct-v1 record",
+  "type": "object",
+  "required": ["id", "language", "domain", "source", "conversations", "created_at"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 6,
+      "description": "Unique record identifier (stable across releases)."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "language": {
+      "type": "string",
+      "enum": ["si", "ta", "en", "mixed"]
+    },
+    "domain": {
+      "type": "string",
+      "minLength": 2
+    },
+    "source": {
+      "type": "object",
+      "required": ["type"],
+      "additionalProperties": false,
+      "properties": {
+        "type": { "type": "string", "enum": ["human", "synthetic", "mixed"] },
+        "provenance": { "type": "string" },
+        "license": { "type": "string" }
+      }
+    },
+    "contributors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["handle", "role"],
+        "additionalProperties": false,
+        "properties": {
+          "handle": { "type": "string", "minLength": 2 },
+          "role": { "type": "string", "enum": ["author", "curator", "verifier", "maintainer"] }
+        }
+      }
+    },
+    "safety": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "pii": { "type": "string", "enum": ["none", "suspected", "removed"] },
+        "notes": { "type": "string" }
+      }
+    },
+    "conversations": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "required": ["role", "content"],
+        "additionalProperties": false,
+        "properties": {
+          "role": { "type": "string", "enum": ["system", "user", "assistant"] },
+          "content": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "quality": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "rating": { "type": "integer", "minimum": 1, "maximum": 5 },
+        "notes": { "type": "string" }
+      }
+    }
+  }
+}

@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Packaging
+build/
+dist/
+*.egg-info/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
+Desktop.ini
+
+# Data artifacts (keep templates tracked)
+data/releases/
+data/raw/
+data/processed/
+
+# Training artifacts
+outputs/
+checkpoints/
+wandb/
+mlruns/
+
+# Secrets
+.env
+.env.*
+*.key
+*.pem
+*.p12
+**/secrets.*

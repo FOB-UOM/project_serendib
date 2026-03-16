@@ -1,0 +1,24 @@
+# Minimal runtime requirements for dataset tooling.
+# For dev tooling, install optional deps: `pip install -e ".[dev]"` (if using pyproject).
+jsonschema>=4.22.0
+tqdm>=4.66.0
+
+# Common ecosystem packages (optional for training/eval workflows)
+datasets>=2.20.0
+transformers>=4.43.0
+accelerate>=0.33.0
+peft>=0.12.0
+trl>=0.9.6
+
+# Proposal OCR utilities (optional; required if using scripts/ocr_proposal.py)
+pymupdf>=1.24.0
+pillow>=10.4.0
+pytesseract>=0.3.10
+
+# Dev
+pytest>=8.2.0
+ruff>=0.6.0
+
+# Argilla (optional)
+argilla>=2.4.0
+gradio>=4.44.0

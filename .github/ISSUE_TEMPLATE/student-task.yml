@@ -1,0 +1,55 @@
+name: Student task
+description: A student-friendly contribution task (verification, curation, evaluation, tooling)
+title: "[Student Task] <short title>"
+labels: ["student", "good first issue"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for contributing to Project Serendib.
+
+        Please keep tasks **small and reviewable**. If you’re new, start with verification.
+
+  - type: dropdown
+    id: task_type
+    attributes:
+      label: Task type
+      options:
+        - Verification (Argilla labeling)
+        - Data curation (new prompts/responses)
+        - Evaluation (benchmarks / cultural eval set)
+        - Tooling (scripts, schema, CI)
+    validations:
+      required: true
+
+  - type: textarea
+    id: goal
+    attributes:
+      label: Goal
+      description: What will be true when this task is done?
+      placeholder: "Example: Add 50 verified dialogues for O/L & A/L education domain."
+    validations:
+      required: true
+
+  - type: textarea
+    id: deliverables
+    attributes:
+      label: Deliverables
+      description: What files or outputs will you create/update?
+      placeholder: |
+        - data/...jsonl
+        - scripts/...
+        - evaluation/...
+    validations:
+      required: true
+
+  - type: textarea
+    id: checklist
+    attributes:
+      label: Checklist
+      value: |
+        - [ ] No PII / sensitive content included
+        - [ ] JSONL validates with `scripts/validate_dataset.py` (if applicable)
+        - [ ] Clear provenance / license metadata added (if applicable)
+        - [ ] PR description includes a short test plan
+

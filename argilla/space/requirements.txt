@@ -1,0 +1,2 @@
+argilla>=2.4.0
+gradio>=4.44.0

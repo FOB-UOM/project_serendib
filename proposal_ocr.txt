@@ -1,0 +1,371 @@
+
+
+===== PAGE 1/13 =====
+
+PROJECT SERENDIB
+
+Truly Local at Heart.
+
+A Proposal for Sri Lanka's Sovereign
+Open-Source Data Infrastructure & Adaptive Al.
+
+The Foundation of Our Digital Future. This proposal outlines
+a strategic initiative to develop a Digital Public Good
+
+for Sri Lankan education and enterprise: a high-quality,
+culturally localized Instruction Dataset and a
+
+corresponding reference Al model.
+
+Ai NotebookLM
+
+
+===== PAGE 2/13 =====
+
+EXECUTIVE SUMMARY:
+THE CASE FOR SOVEREIGN Al
+
+01 THE MANDATE
+
+To move beyond simple translation and capture
+“epistemic context” —the specific reasoning,
+regulatory, and cultural dynamics of Sri Lanka.
+Global models fail to grasp our local reality.
+
+03 THE METHOD
+
+Utilizing a ‘Lean-Al’ framework that prioritizes
+curation over raw computation. We leverage
+student participation to solve the ‘Data Scarcity’
+bottleneck, turning a cost center into an
+educational opportunity.
+
+02 THE SOLUTION
+
+Constructing a high-quality ‘Instruction Dataset’
+and a ‘Reference AI Model’ (Lanka-Instruct-vl).
+We prioritize Data as the primary asset, with the
+Model as the proof of concept.
+
+04 THE OUTCOME
+
+Enabling the University to lead the nation in
+sovereign AI development, building upon the
+foundational success of local efforts like
+SinLLM.
+
+Ai NotebookLM
+
+
+===== PAGE 3/13 =====
+
+THE CONTEXT GAP: WHERE GLOBAL MODELS FAIL
+GLOBAL MODEL REALITY
+
+¢ Context-Blindness: Operates on e Epistemic Context: Requires understanding
+generalized Western training data. of local cultural reasoning.
+
+¢ Hallucinations: Invents incorrect facts e Nuance: Needs accuracy in local history
+regarding O/L & A/L syllabi. and social dynamics.
+
+¢ Regulatory Failure: Misinterprets local Sri ¢ Sovereignty: Reliance on foreign tech
+Lankan business laws. creates dependency.
+
+Ai NotebookLM
+
+
+===== PAGE 4/13 =====
+
+THE CORE PROBLEM IS DATA, NOT CODE
+
+GLOBAL ALGORITHMS LOCAL DATA | SRI LANKAN Al UTILITY
+
+O
+
+’ THE BOTTLENECK:
+No ‘Golden Standard’ open-source
+instruction dataset exists
+
+for Sri Lankan domains.
+
+The Opportunity: We do not need to reinvent the wheel regarding architecture. By leveraging existing global
+architectures, we can focus our limited resources on the most critical missing piece: High-Quality Local Data.
+Ai NotebookLM
+
+
+===== PAGE 5/13 =====
+
+PROJECT OBJECTIVES: A TWO-TIERED APPROACH
+
+=
+
+PRIMARY OBJECTIVE: THE ASSET SECONDARY OBJECTIVE: THE PROOF
+
+|
+
+The Sri Lankan Open Instruction Dataset | Lanka-Instruct-vl (Pilot Model)
+|
+|
+
+¢ A lightweight, efficient Small Language
+Model (SLM).
+
+° Goal: To demonstrate the utility of the
+dataset in a practical application.
+
+¢ A rigorously curated, multi-turn dialogue
+dataset.
+
+¢ Focus Domains: O/L & A/L Education, SME
+Business Regulations, and Local History.
+
+Ai NotebookLM
+
+
+===== PAGE 6/13 =====
+
+STRATEGIC CONTINUITY: BUILDING ON
+
+THE SHOULDERS OF SinLLM
+
+PROJECT SERENDIB
+(Instruction Tuning &
+Epistemic Context)
+
+Global Base Architectures
+(Llama, Mistral, etc.)
+
+Proposed
+Adaptation
+Layer
+
+Existing
+Institutional
+Success
+
+Continuous Research Lineage
+
+Complementary, Not
+Competitive.
+
+Our new model will not compete
+with SinLLM but complement it. We
+will specifically target “Instruction
+Following” capabilities that older
+base models might lack. This
+approach avoids the fragility of
+“starting from scratch” and extends
+the university's research lineage.
+
+Ai NotebookLM
+
+
+===== PAGE 7/13 =====
+
+METHODOLOGY PHASE I: PARTICIPATORY DATA CURATION
+
+strategy: Raw Data
+Human-in-the-Loop. Sources
+We leverage the student
+body to curate and verify
+raw data.
+
+oo
+
+From Cost Center to
+Education Center:
+Instead of viewing data
+cleaning as a tedious
+cost, we frame it as skill
+acquisition. Students gain
+credits, badges, and tangible Golden
+experience in Data Standard
+Engineering. Dataset
+
+Gamified
+Verification
+& Cleaning
+
+Flywheel
+
+Student
+Crowd
+Engine
+
+Ai NotebookLM
+
+
+===== PAGE 8/13 =====
+
+METHODOLOGY PHASE II: THE ‘LEAN-Al’ TECHNICAL LAYER
+
+Transfer Learning
+
+LoRA Adapter
+(Trainable Parameters)
+
+Pre-Trained Low-Rank Adaptation
+Base Model
+(Frozen Weights)
+
+LoRA Adapter
+(Trainable Parameters)
+
+Technique: LoRA & PEFT. Goal.
+
+Resource Efficiency.
+
+We avoid the massive cost of Updating only a small fraction of To create an adaptive layer that
+pre-training from scratch. Instead, parameters allows us to adapt the bridges the global base model
+we utilize Transfer Learning. model to local contexts without high with local instruction data.
+
+compute costs. This enables
+operations on standard hardware.
+
+Ai NotebookLM
+
+
+===== PAGE 9/13 =====
+
+METHODOLOGY PHASE III:
+EVALUATION & DEPLOYMENT
+
+|
+
+Global Benchmarks (MMLU)
+
+Redefining Success:
+Cultural Benchmarking.
+
+Success is not defined by beating
+Google on general knowledge, but
+by proving the dataset improves
+local relevance.
+
+The Test:
+
+The model is tested against a
+specifically created ‘Sri Lankan
+Cultural Evaluation Set’.
+
+Project Serendib
+Target
+
+Cultural Relevance
+
+Deployment strategy:
+
+A focus on lightweight deployment
+allows the model to be accessible
+to local researchers and
+developers, ensuring the tool
+remains usable within the
+university ecosystem.
+
+Ai NotebookLM
+
+
+===== PAGE 10/13 =====
+
+RESOURCE REQUIREMENTS: OPERATIONAL EFFICIENCY
+
+COMPUTE REQUIREMENTS HUMAN CAPITAL
+(MINIMAL) (THE CROWD ENGINE)
+
+Mie
+BS (ors) Ba
+
+oan (Ly es
+
+By using PEFT and leveraging pre-trained Relying on student volunteers and interns for
+weights, operations can run on standard data verification eliminates high labor costs
+university GPUs or low-tier cloud instances. while providing educational value.
+
+No need for super-clusters.
+
+Ai NotebookLM
+
+
+===== PAGE 11/13 =====
+
+STRATEGIC IMPACT: FACULTY & STUDENTS
+
+FOR THE FACULTY FOR THE STUDENTS
+
+Skill & Future.
+
+Prestige & Continuity.
+
+e Institutional Legacy: Proves the | e Hands-on AI Literacy: Students
+faculty is building a cumulative move from being passive ‘users’
+body of work. to active ‘builders’.
+
+Research Output: The dataset
+itself is a citable, publishable
+academic asset.
+
+e Employability: Graduates gain
+skills in the exploding field of
+Data Annotation and AI Tuning.
+
+Ai NotebookLM
+
+
+===== PAGE 12/13 =====
+
+NATIONAL IMPACT: DGTAL SOVEREIGNTY
+
+Sovereignty. Independence.
+
+Allowing local startups and Reducing dependency on
+
+SMEs to grow their own external “black box” models
+
+applications without relying for critical national tasks.
+
+entirely on foreign tech giants. Just as physical infrastructure
+enables commerce, this data
+
+V3 infrastructure enables the
+
+digital economy.
+
+nes
+
+“The ee
+Providing the
+
+Qe
+
+a ee
+eee Bey
+1 i td at
+
+Digital Soil
+
+Ai NotebookLM
+
+
+===== PAGE 13/13 =====
+
+CONCLUSION: A LOW-RISK, HIGH-REWARD INITIATIVE
+
+By focusing on Data as the Product and
+leveraging existing strengths, we secure a
+critical piece of digital infrastructure.
+
+Ensures our local
+
+context is preserved
+in the AI age.
+
+Avoids the ‘fragility’ of
+direct competition
+with global giants.
+
+Leverages existing
+SInLLM lineage.
+
+Project Serendib is the logical next step for the University and the Nation.
+
+A) NotebookLM

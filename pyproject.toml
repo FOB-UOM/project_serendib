@@ -1,0 +1,48 @@
+[project]
+name = "project-serendib"
+version = "0.1.0"
+description = "Sri Lanka sovereign instruction dataset + Lanka-Instruct-v1 tooling"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [
+  { name = "Project Serendib Contributors" },
+]
+dependencies = [
+  "jsonschema>=4.22.0",
+  "tqdm>=4.66.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.2.0",
+  "ruff>=0.6.0",
+]
+ocr = [
+  "pymupdf>=1.24.0",
+  "pillow>=10.4.0",
+  "pytesseract>=0.3.10",
+]
+train = [
+  "datasets>=2.20.0",
+  "transformers>=4.43.0",
+  "accelerate>=0.33.0",
+  "peft>=0.12.0",
+  "trl>=0.9.6",
+  # Note: Unsloth + bitsandbytes are GPU/OS sensitive; see scripts/train_* for guidance.
+]
+argilla = [
+  "argilla>=2.4.0",
+  "gradio>=4.44.0",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+

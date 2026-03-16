@@ -1,0 +1,32 @@
+name: Bug report
+description: Report a bug in scripts, schema, or CI
+title: "[Bug] <short title>"
+labels: ["bug"]
+body:
+  - type: textarea
+    id: what_happened
+    attributes:
+      label: What happened?
+      description: Include exact error messages and steps to reproduce.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, Python version, and install method.
+      placeholder: |
+        - OS:
+        - Python:
+        - Install:
+    validations:
+      required: false
+

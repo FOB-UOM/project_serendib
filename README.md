@@ -1,50 +1,51 @@
-# Project Serendib
+# Project Serendib — Sovereign Sinhala Data Ecosystem
 
-Sri Lanka’s open **sovereign instruction dataset** initiative — building `Lanka-Instruct-v1` with transparent governance, student participation, and reproducible training/evaluation workflows.
+Truly Local at Heart. Multi-Type Open Corpus for Deep Local Intelligence & Adaptive AI.
 
-## What this repo contains
+## Core thesis
 
-- **`data/`**: Dataset schema, templates, and (optionally) curated/validated releases.
-- **`scripts/`**: Data validation, conversion, and training utilities.
-- **`notebooks/`**: Exploration/QA notebooks (kept lightweight, reproducible).
-- **`evaluation/`**: Benchmarks, prompts, and evaluation harness stubs.
-- **`argilla/`**: Student verification workflows (Hugging Face Space-ready scaffold).
-- **`PROPOSAL.md`**: OCR transcription of the proposal for easy reference.
+Global models lack epistemic depth in Sinhala contexts. We solve this by creating a full multi-type open data foundation:
 
-## Current focus: Teacher workflows (v0.1)
+- Rich raw knowledge corpus for factual grounding and continued pre-training
+- High-quality instruction data for helpful, culturally aligned behavior
+- Bridging layers (reasoning/CoT, structured QA, etc.) for advanced intelligence
+- Student-powered curation flywheel that turns data work into education
 
-We are starting with a teacher-assistant slice aimed at helping Sri Lanka school teachers with day-to-day work:
+Building on the original instruction-focused vision, we now expand to a full multi-type ecosystem for deeper intelligence. This work is **complementary to SinLLM lineage**, not competitive.
 
-- Classroom management + pedagogy
-- Low-resource teaching aids
-- Exam prep
-- Remediation / differentiation
+## Multi-type data layers
 
-See `data/teachers_v0_1/`.
+- **Layer 0 — Raw Pre-Training Corpus** (`corpus-raw/`)  
+  Deepest driver of local factual grounding: books, historical documents, laws, newspapers, manuscripts (with provenance + licensing).
 
-## Executive summary (to be derived from the proposal)
+- **Layer 1 — Instruction Dataset** (`instruction/`)  
+  Multi-turn dialogues in focus domains (deliverable-first).
 
-The proposal PDF for Project Serendib is **image-based**. We OCR’d it into `proposal_ocr.txt` (repo file) to extract the content below.
+- **Layer 2 — Reasoning & “Chain-of-Thought”** (`reasoning/`)  
+  Step-by-step explanations and reasoning traces (stored as structured artifacts; see layer README).
 
-- **Mandate**: Move beyond “simple translation” to capture Sri Lanka’s **epistemic context** (local reasoning, regulatory dynamics, cultural context). The proposal argues global models are “context-blind” for Sri Lankan needs.
-- **Solution**: Build a high-quality **Instruction Dataset** as the primary asset, plus a **Reference AI Model** (`Lanka-Instruct-v1`) as proof of utility.
-- **Method**: Apply a **Lean-AI** approach that prioritizes curation over raw compute; use **student participation** to solve the “data scarcity” bottleneck and convert data work into education (credits/badges).
-- **Outcome**: Enable the university to lead **sovereign AI development**, building on and complementing local efforts like **SinLLM**.
+- **Layer 3 — Domain-Specific Structured Data** (`structured/`)  
+  QA pairs, summarization, entity extraction, especially for laws & education.
 
-## Objectives (to be derived from the proposal)
+- **Layer 4 — Advanced Types (future stubs)** (`advanced/`)  
+  Parallel Sinhala–English, preference data, tool-use traces, etc.
 
-- **Primary objective (the asset)**: a rigorously curated **Sri Lankan Open Instruction Dataset** (multi-turn dialogue).
-- **Secondary objective (the proof)**: `Lanka-Instruct-v1` pilot / reference model to demonstrate the dataset’s practical utility.
-- **Focus domains (initial)**: O/L & A/L education, SME business regulations, and local history.
-- **Strategic continuity**: extend (not compete with) **SinLLM**, specifically improving instruction-following via an adaptation layer on global base architectures (Llama/Mistral, etc.).
+## Supporting infrastructure
 
-## Methodology (to be derived from the proposal)
+- `ocr-pipeline/` — Tesseract + TrOCR Sinhala OCR starters
+- `synthetic-gen/` — Bonito / LLaMA-Factory style synthetic generation (human verification required)
+- `training/` — Unsloth QLoRA scripts for instruction + continued-pretrain (mixed training later)
+- `argilla/` — gamified student verification tasks + leaderboard scaffolding
+- `evaluation/` — Sri Lankan cultural benchmark + custom eval set scaffolding
+- `notebooks/` — Colab-friendly examples
 
-- **Phase I — Participatory data curation**: human-in-the-loop verification/cleaning using the student body; treat data engineering as skill acquisition with a **gamified flywheel** (credits, badges, experience).
-- **Phase II — Lean-AI technical layer**: **transfer learning** with **LoRA/PEFT** adapters on a frozen pre-trained base model; update a small fraction of parameters to bridge global models with local instruction data (resource efficient; standard hardware).
-- **Phase III — Evaluation & deployment**: define success via **cultural relevance** rather than only global benchmarks; create a “Sri Lankan Cultural Evaluation Set” and aim for lightweight deployments accessible to local researchers/developers.
+## Phased deliverables
 
-## Quickstart
+- **v0.1 Pilot (1–3 months)**: Layer 1 (instruction) + small `Lanka-Instruct-v1` on Qwen2.5-7B or SinLLM base (Lean-AI via LoRA/PEFT)
+- **v1.0 Depth (3–9 months)**: Add Layer 0 raw corpus + mixed training
+- **v2.0 Holistic Ecosystem (9–24 months)**: All layers live with 100+ student contributors
+
+## Quick-start (students & researchers)
 
 ### Install (recommended: venv)
 
@@ -54,47 +55,60 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
-### Validate a JSONL dataset file
+### Validate an instruction JSONL file
 
 ```bash
-python scripts\validate_dataset.py --input data\hf_dataset_template\lanka_instruct_v1.sample.jsonl
+python instruction\validate_dataset.py --input instruction\hf_dataset_template\lanka_instruct_v1.sample.jsonl
 ```
 
-### Train (stub) with Unsloth QLoRA
+### Train (baseline) with Unsloth QLoRA (instruction)
 
 ```bash
-python scripts\train_unsloth_qlora_7b.py --dataset data\hf_dataset_template\lanka_instruct_v1.sample.jsonl
+python training\train_unsloth_qlora.py --dataset instruction\hf_dataset_template\lanka_instruct_v1.sample.jsonl
 ```
 
-## Dataset format (HF-friendly)
-
-Each record is a single JSON object (JSON Lines / `.jsonl`) representing one conversation with metadata. See:
-
-- `data/hf_dataset_template/schema.json` (JSON Schema)
-- `data/hf_dataset_template/lanka_instruct_v1.sample.jsonl` (sample)
-
-## Contributing
+## Student contribution guide (Argilla gamification)
 
 Start here: `CONTRIBUTING.md`.
 
-### Student gamification (credits & badges)
+Fast onboarding:
 
-We track contributions by **credits** awarded for validated work:
+- **Verify 10 examples → earn badge + credit** (Argilla verification queue)
+- **Fix 5 flagged issues → earn curator credit** (formatting/provenance/safety)
+- **Add 10 eval prompts → earn evaluator credit** (cultural benchmark growth)
 
-- **Verifier (1–3 credits)**: label quality, safety, and relevance in Argilla tasks
-- **Curator (3–8 credits)**: improve prompts/responses, add metadata, fix formatting
+Credits (typical):
+
+- **Verifier (1–3 credits)**: label quality, safety, language, relevance in Argilla
+- **Curator (3–8 credits)**: improve records, add metadata/provenance, fix schema
 - **Evaluator (3–8 credits)**: add evaluation prompts, run baselines, report regressions
 - **Maintainer (8+ credits)**: review PRs, manage releases, update schema/process
 
 Badges (maintainers may award):
 
 - **Bronze** (10 credits), **Silver** (25), **Gold** (50), **Platinum** (100)
-- **Domain Specialist** (e.g., Health, Agriculture, Public Services)
+- **Domain Specialist** (education, SME regs, history, etc.)
 - **Language Champion** (Sinhala/Tamil/English)
 - **Safety Steward** (PII/safety triage excellence)
 
-Your name/handle can be added to `CREDITS.md` (opt-in).
+Opt-in credit roll: `CREDITS.md`.
 
-## License
+## Tech stack (2026)
 
-Code is MIT (see `LICENSE`). Dataset licensing depends on sources and will be documented per-release in `data/` (dataset card + provenance).
+- **Cursor** for contributor productivity and reviews
+- **Unsloth** for fast QLoRA/PEFT fine-tuning
+- **Argilla** for student labeling/verification + leaderboards
+- **Bonito / LLaMA-Factory style pipelines** for synthetic candidate generation
+- **Tesseract (Sinhala) + TrOCR** for OCR ingestion
+
+## Original proposal and continuity
+
+- **Original proposal (OCR transcription)**: `PROPOSAL.md`  
+- **OCR outputs**: `proposal_ocr.txt`, `proposal_extracted.md`  
+
+If you have the original proposal PDF, add it to the repo root as `PROPOSAL.pdf` and link it from this section.
+
+## License and public good commitment
+
+- **License**: MIT (`LICENSE`)
+- **Code of conduct**: this project is a **national digital public good** for education and enterprise; contributors must follow `CODE_OF_CONDUCT.md` and avoid harmful content and PII.

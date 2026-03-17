@@ -1,28 +1,49 @@
 # Contributing to Project Serendib
 
-Thanks for helping build Sri Lanka’s sovereign instruction dataset.
+Thanks for helping build **Project Serendib — Sovereign Sinhala Data Ecosystem** at University of Moratuwa (FOB-UOM).
 
-## Ground rules
+This project is a **digital public good**. Please read `CODE_OF_CONDUCT.md` first.
 
-- **Be respectful**: default to kind, constructive feedback.
-- **No sensitive data**: do not submit personally identifiable information (PII), credentials, or private documents.
-- **Provenance matters**: record sources and licenses for any externally-derived content.
-- **Quality over quantity**: prefer fewer, well-verified examples over large noisy dumps.
+## Student onboarding (fast path)
 
-## Ways to contribute
+If you’re new, start with verification:
 
-- **Student verification (recommended start)**: complete verification tasks in `argilla/` (label quality/safety, language, relevance).
-- **Data curation**: propose new prompts/responses in the dataset JSONL format.
-- **Tooling**: improve validation scripts, schema, conversions, or evaluation harness.
-- **Evaluation**: add benchmarks and help run reproducible baselines.
+- **Step 1**: Join the Argilla verification queue in `argilla/`
+- **Step 2**: **Verify 10 examples** (quality + safety + language + domain tags)
+- **Reward**: earn your **first badge** + credits; opt-in to be listed in `CREDITS.md`
 
-## Repository structure
+## Gamified roles (credits & badges)
 
-- `data/`: schema, templates, and release artifacts (large raw data is intentionally ignored by git)
-- `scripts/`: CLI tools (validation, training stubs)
-- `evaluation/`: evaluation harness scaffolding
-- `argilla/`: verification task app (Space scaffold)
-- `notebooks/`: exploration notebooks
+Credits are awarded for validated work (typical ranges):
+
+- **Verifier (1–3 credits)**: approve/reject, tag issues, mark PII/harm, domain/language
+- **Curator (3–8 credits)**: fix issues, improve clarity, add provenance, ensure schema-valid
+- **Evaluator (3–8 credits)**: add cultural benchmark prompts, run baselines, report regressions
+- **Maintainer (8+ credits)**: review PRs, manage releases, evolve schemas and workflows
+
+Badges (maintainers may award):
+
+- **Bronze** (10 credits), **Silver** (25), **Gold** (50), **Platinum** (100)
+- **Domain Specialist**, **Language Champion**, **Safety Steward**
+
+## What you can contribute
+
+- **Layer 0 (`corpus-raw/`)**: curated raw Sinhala text + provenance/metadata
+- **Layer 1 (`instruction/`)**: multi-turn dialogues (HF-friendly JSONL)
+- **Layer 2 (`reasoning/`)**: step-by-step explanations (structured artifacts)
+- **Layer 3 (`structured/`)**: QA, summarization, entity extraction (esp. education/law)
+- **Layer 4 (`advanced/`)**: templates for future advanced types
+- **Tooling**: validators, OCR utilities, synthetic-gen scripts, CI
+- **Evaluation**: Sri Lankan cultural benchmark prompts + harness improvements
+
+## Repo layout (high level)
+
+- `corpus-raw/` — Layer 0
+- `instruction/` — Layer 1 (includes schema + validator)
+- `reasoning/` — Layer 2
+- `structured/` — Layer 3
+- `advanced/` — Layer 4
+- `ocr-pipeline/`, `synthetic-gen/`, `training/`, `argilla/`, `evaluation/`, `notebooks/`
 
 ## Development setup
 
@@ -39,20 +60,23 @@ ruff check .
 pytest -q
 ```
 
-## Dataset contribution workflow
+## Contribution workflow (PRs)
 
-1. **Pick a task** in GitHub Issues (see “Student task” templates).
+1. **Pick an issue** (see `.github/ISSUE_TEMPLATE/`)
 2. **Create a branch**: `git checkout -b student/<your-handle>/<short-topic>`
-3. **Add or edit data** under `data/` (templates are in `data/hf_dataset_template/`).
-4. **Validate locally**:
+3. **Make small, reviewable changes** (data and/or code)
+4. **Validate locally** (when adding instruction JSONL):
 
 ```bash
-python scripts\validate_dataset.py --input <your-file>.jsonl
+python instruction\validate_dataset.py --input <your-file>.jsonl
 ```
 
-5. **Open a PR** with a clear description and test plan.
+5. **Open a PR** with:
+   - a short summary
+   - what layer(s) you touched
+   - a test plan (commands you ran)
 
 ## Credits (opt-in)
 
-If you’d like to be credited, add yourself to `CREDITS.md` in your PR.
+Add yourself to `CREDITS.md` in your PR (optional).
 

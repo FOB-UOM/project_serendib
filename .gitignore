@@ -27,9 +27,25 @@ Thumbs.db
 Desktop.ini
 
 # Data artifacts (keep templates tracked)
-data/releases/
-data/raw/
-data/processed/
+corpus-raw/data/
+corpus-raw/raw/
+corpus-raw/processed/
+instruction/releases/
+instruction/raw/
+instruction/processed/
+reasoning/releases/
+reasoning/raw/
+reasoning/processed/
+structured/releases/
+structured/raw/
+structured/processed/
+advanced/releases/
+advanced/raw/
+advanced/processed/
+
+# OCR artifacts
+ocr-pipeline/outputs/
+ocr-pipeline/tmp/
 
 # Training artifacts
 outputs/

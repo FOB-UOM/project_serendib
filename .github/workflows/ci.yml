@@ -26,6 +26,10 @@ jobs:
         run: |
           python -m ruff check .
 
+      - name: Dataset validation (sample)
+        run: |
+          python instruction/validate_dataset.py --input instruction/hf_dataset_template/lanka_instruct_v1.sample.jsonl
+
       - name: Pytest
         run: |
           python -m pytest -q

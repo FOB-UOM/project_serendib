@@ -37,8 +37,14 @@ body:
       label: Deliverables
       description: What files or outputs will you create/update?
       placeholder: |
-        - data/...jsonl
-        - scripts/...
+        - instruction/...jsonl
+        - corpus-raw/...txt (+ metadata)
+        - reasoning/...jsonl
+        - structured/...jsonl
+        - advanced/... (templates/samples)
+        - ocr-pipeline/...
+        - synthetic-gen/...
+        - training/...
         - evaluation/...
     validations:
       required: true
@@ -49,7 +55,7 @@ body:
       label: Checklist
       value: |
         - [ ] No PII / sensitive content included
-        - [ ] JSONL validates with `scripts/validate_dataset.py` (if applicable)
+        - [ ] JSONL validates with `instruction/validate_dataset.py` (if applicable)
         - [ ] Clear provenance / license metadata added (if applicable)
         - [ ] PR description includes a short test plan
 

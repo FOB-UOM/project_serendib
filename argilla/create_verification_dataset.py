@@ -29,8 +29,10 @@ def main() -> int:
 
     try:
         import argilla as rg  # type: ignore[import]
-    except ImportError:
-        raise SystemExit("Argilla is not installed. Install extras with: pip install argilla gradio")
+    except ImportError as err:
+        raise SystemExit(
+            "Argilla is not installed. Install extras with: pip install argilla gradio"
+        ) from err
 
     rg.init(api_url=api_url, api_key=api_key, workspace=workspace)
 
@@ -46,7 +48,11 @@ def main() -> int:
             rg.TextField(name="id", title="Record ID", required=True),
             rg.TextField(name="domain", title="Domain tag", required=False),
             rg.TextField(name="language", title="Language tag (si/ta/en/mixed)", required=False),
-            rg.TextField(name="source_type", title="Source (human/synthetic/mixed)", required=False),
+            rg.TextField(
+                name="source_type",
+                title="Source (human/synthetic/mixed)",
+                required=False,
+            ),
             rg.TextField(name="conversation", title="Conversation (rendered)", required=True),
             rg.TextField(name="provenance", title="Provenance/notes", required=False),
         ],

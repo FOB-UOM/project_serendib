@@ -8,12 +8,20 @@ def _ensure_parent(path: Path) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
 
 
-def _ocr_with_tesseract(input_path: Path, output_txt: Path, dpi: int, lang: str, tesseract_cmd: str | None) -> None:
+def _ocr_with_tesseract(
+    input_path: Path,
+    output_txt: Path,
+    dpi: int,
+    lang: str,
+    tesseract_cmd: str | None,
+) -> None:
     try:
         import pytesseract  # type: ignore[import]
         from PIL import Image  # type: ignore[import]
-    except ImportError:
-        raise SystemExit("Missing OCR deps. Install: pip install pymupdf pillow pytesseract")
+    except ImportError as err:
+        raise SystemExit(
+            "Missing OCR deps. Install: pip install pymupdf pillow pytesseract"
+        ) from err
 
     if tesseract_cmd:
         pytesseract.pytesseract.tesseract_cmd = tesseract_cmd
@@ -23,8 +31,8 @@ def _ocr_with_tesseract(input_path: Path, output_txt: Path, dpi: int, lang: str,
     if input_path.suffix.lower() == ".pdf":
         try:
             import fitz  # type: ignore[import]
-        except ImportError:
-            raise SystemExit("Missing PyMuPDF. Install: pip install pymupdf")
+        except ImportError as err:
+            raise SystemExit("Missing PyMuPDF. Install: pip install pymupdf") from err
 
         doc = fitz.open(str(input_path))
         for i in range(doc.page_count):
@@ -43,13 +51,25 @@ def _ocr_with_tesseract(input_path: Path, output_txt: Path, dpi: int, lang: str,
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Sinhala-centric OCR CLI (Tesseract first; TrOCR stub).")
+    parser = argparse.ArgumentParser(
+        description="Sinhala-centric OCR CLI (Tesseract first; TrOCR stub)."
+    )
     parser.add_argument("--input", type=Path, required=True, help="Path to PDF/image")
     parser.add_argument("--output", type=Path, required=True, help="Path to output .txt")
     parser.add_argument("--engine", type=str, default="tesseract", choices=["tesseract", "trocr"])
     parser.add_argument("--dpi", type=int, default=300, help="PDF render DPI (tesseract)")
-    parser.add_argument("--lang", type=str, default="sin", help="Tesseract language code (e.g., sin, eng, sin+eng)")
-    parser.add_argument("--tesseract-cmd", type=str, default=None, help="Optional path to tesseract executable")
+    parser.add_argument(
+        "--lang",
+        type=str,
+        default="sin",
+        help="Tesseract language code (e.g., sin, eng, sin+eng)",
+    )
+    parser.add_argument(
+        "--tesseract-cmd",
+        type=str,
+        default=None,
+        help="Optional path to tesseract executable",
+    )
     args = parser.parse_args()
 
     if not args.input.exists():

@@ -8,7 +8,13 @@ import pytesseract
 from PIL import Image
 
 
-def ocr_pdf(input_pdf: Path, output_txt: Path, dpi: int, lang: str, tesseract_cmd: str | None) -> None:
+def ocr_pdf(
+    input_pdf: Path,
+    output_txt: Path,
+    dpi: int,
+    lang: str,
+    tesseract_cmd: str | None,
+) -> None:
     if tesseract_cmd:
         pytesseract.pytesseract.tesseract_cmd = tesseract_cmd
 
@@ -29,8 +35,18 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="OCR an image-based PDF into a UTF-8 text file.")
     parser.add_argument("--input", type=Path, required=True, help="Path to PDF")
     parser.add_argument("--output", type=Path, required=True, help="Path to output .txt")
-    parser.add_argument("--dpi", type=int, default=300, help="Render DPI (higher = slower, often better)")
-    parser.add_argument("--lang", type=str, default="eng", help="Tesseract language code (e.g., eng)")
+    parser.add_argument(
+        "--dpi",
+        type=int,
+        default=300,
+        help="Render DPI (higher = slower, often better)",
+    )
+    parser.add_argument(
+        "--lang",
+        type=str,
+        default="eng",
+        help="Tesseract language code (e.g., eng)",
+    )
     parser.add_argument(
         "--tesseract-cmd",
         type=str,

@@ -4,10 +4,10 @@ import argparse
 import json
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any
 
 
-def _load_seed_prompts(path: Path) -> List[str]:
+def _load_seed_prompts(path: Path) -> list[str]:
     if not path.exists():
         raise SystemExit(f"Seed file not found: {path}")
     prompts = [ln.strip() for ln in path.read_text(encoding="utf-8").splitlines() if ln.strip()]
@@ -24,7 +24,12 @@ def main() -> int:
     parser = argparse.ArgumentParser(
         description="Generate synthetic instruction candidates (Bonito/LLaMA-Factory style stub)."
     )
-    parser.add_argument("--seeds", type=Path, required=True, help="Text file with one seed prompt per line")
+    parser.add_argument(
+        "--seeds",
+        type=Path,
+        required=True,
+        help="Text file with one seed prompt per line",
+    )
     parser.add_argument(
         "--output",
         type=Path,
@@ -48,10 +53,12 @@ def main() -> int:
     seeds = _load_seed_prompts(args.seeds)[: args.limit]
 
     try:
-        from transformers import AutoModelForCausalLM, AutoTokenizer  # type: ignore[import]
         import torch  # type: ignore[import]
-    except ImportError:
-        raise SystemExit("Missing deps. Install: pip install transformers accelerate torch")
+        from transformers import AutoModelForCausalLM, AutoTokenizer  # type: ignore[import]
+    except ImportError as err:
+        raise SystemExit(
+            "Missing deps. Install: pip install transformers accelerate torch"
+        ) from err
 
     tokenizer = AutoTokenizer.from_pretrained(args.model)
     model = AutoModelForCausalLM.from_pretrained(
@@ -60,14 +67,14 @@ def main() -> int:
         device_map="auto",
     )
 
-    out_lines: List[str] = []
+    out_lines: list[str] = []
     now = datetime.now(timezone.utc).isoformat()
 
     for i, seed in enumerate(seeds, start=1):
         prompt = (
             "You are helping build a Sri Lankan-local instruction dataset.\n"
             "Write a short multi-turn dialogue (user+assistant) in Sinhala where possible.\n"
-            "Be safe. Avoid PII. If the domain is law/regs, avoid giving definitive legal advice.\n\n"
+            "Be safe. Avoid PII. If the domain is law/regs, avoid definitive legal advice.\n\n"
             f"Seed topic: {seed}\n\n"
             "Output ONLY the assistant reply for the last turn, in plain text."
         )
@@ -83,7 +90,7 @@ def main() -> int:
         # Heuristic: keep the tail; this is a stub and will be improved.
         response = gen.split("Output ONLY")[-1].strip()
 
-        record: Dict[str, Any] = {
+        record: dict[str, Any] = {
             "id": f"synthetic_{now}_{i:04d}",
             "language": args.language,
             "domain": args.domain,

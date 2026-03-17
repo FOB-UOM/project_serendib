@@ -2,10 +2,11 @@ from __future__ import annotations
 
 import argparse
 import json
+from collections.abc import Iterable
 from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, Iterable, List
+from typing import Any
 
 
 @dataclass
@@ -28,14 +29,14 @@ class TrainConfig:
 def _ensure_unsloth_available() -> None:
     try:
         import unsloth  # noqa: F401  # type: ignore[import-not-found]
-    except ImportError as e:  # noqa: F841
+    except ImportError as err:
         message = (
             "Unsloth is not installed.\n"
             "Install GPU training deps first, for example:\n"
             "  pip install \"unsloth[cu121]\" bitsandbytes torch --extra-index-url "
             "https://download.pytorch.org/whl/cu121\n"
         )
-        raise SystemExit(message)
+        raise SystemExit(message) from err
 
 
 def _iter_text_files(path: Path) -> Iterable[Path]:
@@ -47,8 +48,8 @@ def _iter_text_files(path: Path) -> Iterable[Path]:
             yield p
 
 
-def _load_corpus_texts(corpus_path: Path, max_docs: int | None) -> List[str]:
-    texts: List[str] = []
+def _load_corpus_texts(corpus_path: Path, max_docs: int | None) -> list[str]:
+    texts: list[str] = []
     for p in _iter_text_files(corpus_path):
         if max_docs is not None and len(texts) >= max_docs:
             break
@@ -81,7 +82,7 @@ def train_qlora(cfg: TrainConfig) -> None:
         if tokenizer.pad_token is None:
             tokenizer.pad_token = tokenizer.eos_token
 
-        def format_example(example: Dict[str, Any]) -> Dict[str, str]:
+        def format_example(example: dict[str, Any]) -> dict[str, str]:
             messages = example["conversations"]
             text = tokenizer.apply_chat_template(
                 messages,
@@ -175,7 +176,10 @@ def main() -> int:
         "--corpus",
         type=str,
         default=None,
-        help="Path to a .txt file or a folder of .txt files (required for --mode continued-pretrain).",
+        help=(
+            "Path to a .txt file or a folder of .txt files "
+            "(required for --mode continued-pretrain)."
+        ),
     )
     parser.add_argument(
         "--base-model",

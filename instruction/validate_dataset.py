@@ -49,7 +49,7 @@ def main() -> int:
     parser.add_argument(
         "--schema",
         type=Path,
-        default=Path("data/hf_dataset_template/schema.json"),
+        default=Path("instruction/hf_dataset_template/schema.json"),
         help="Path to schema.json",
     )
     args = parser.parse_args()

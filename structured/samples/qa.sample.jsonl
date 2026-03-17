@@ -1,0 +1,2 @@
+{"id":"layer3_sample_0001","language":"si","domain":"sme_regulations","task":"qa","input":"ශ්‍රී ලංකාවේ ව්‍යාපාරයක් ලියාපදිංචි කිරීමේදී (SME) අවම වශයෙන් සලකා බැලිය යුතු දෑ මොනවාද?","output":"ව්‍යාපාරයේ වර්ගය, ලියාපදිංචි අධිකාරිය, බදු ලියාපදිංචිය (අදාළ නම්), සහ අදාළ නියාමන අවශ්‍යතා සලකා බලන්න. (මෙය placeholder උදාහරණයකි; නීතිමය උපදෙස් නොවේ.)","entities":[{"type":"country","value":"Sri Lanka"},{"type":"topic","value":"business registration"}],"source":{"type":"human","provenance":"Placeholder sample for templates"},"created_at":"2026-03-17"}
+

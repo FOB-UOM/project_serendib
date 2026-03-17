@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Serendib Layer0 Document Metadata",
+  "type": "object",
+  "required": ["id", "language", "title", "source", "license", "created_at"],
+  "properties": {
+    "id": { "type": "string", "minLength": 1 },
+    "language": { "type": "string", "enum": ["si", "ta", "en", "mixed"] },
+    "title": { "type": "string", "minLength": 1 },
+    "source": {
+      "type": "object",
+      "required": ["type", "citation"],
+      "properties": {
+        "type": { "type": "string", "enum": ["public_domain", "permission", "open_license", "unknown"] },
+        "citation": { "type": "string", "minLength": 1 },
+        "url": { "type": "string" }
+      }
+    },
+    "license": { "type": "string", "minLength": 1 },
+    "created_at": { "type": "string", "minLength": 1 },
+    "notes": { "type": "string" },
+    "tags": { "type": "array", "items": { "type": "string" } }
+  }
+}
+

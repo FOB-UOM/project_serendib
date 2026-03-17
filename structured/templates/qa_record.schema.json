@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Serendib Layer3 Structured QA Record",
+  "type": "object",
+  "required": ["id", "language", "domain", "task", "input", "output", "source"],
+  "properties": {
+    "id": { "type": "string", "minLength": 1 },
+    "language": { "type": "string", "enum": ["si", "ta", "en", "mixed"] },
+    "domain": { "type": "string", "minLength": 1 },
+    "task": { "type": "string", "enum": ["qa", "summarization", "entity_extraction"] },
+    "input": { "type": "string", "minLength": 1 },
+    "output": { "type": "string", "minLength": 1 },
+    "entities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "value"],
+        "properties": {
+          "type": { "type": "string" },
+          "value": { "type": "string" }
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": { "type": "string", "enum": ["human", "synthetic", "mixed"] },
+        "provenance": { "type": "string" }
+      }
+    },
+    "created_at": { "type": "string" }
+  }
+}
+

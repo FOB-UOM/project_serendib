@@ -1,0 +1,2 @@
+{"id":"layer2_sample_0001","language":"si","domain":"education_al","question":"වගු 3ක් දී ඇති විට සාමාන්‍යය (average) ගණනය කරන්නේ කෙසේද?","answer":"සමස්ත එකතුව 3ෙන් බෙදා සාමාන්‍යය ලබාගන්න.","steps":[{"type":"rule","content":"සාමාන්‍යය = (අගයන් එකතුව) / (අග ගණනාව) ය."},{"type":"calculation","content":"අගයන් 3ක් නම් එකතුව 3ෙන් බෙදන්න."},{"type":"check","content":"අගයන් එකකින්වත් හිස්/අගයක් නොමැති බව තහවුරු කරන්න."}],"source":{"type":"human","provenance":"Placeholder sample for templates"},"created_at":"2026-03-17"}
+

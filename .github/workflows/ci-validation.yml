@@ -2,6 +2,7 @@ name: CI Validation
 
 on:
   workflow_dispatch:
+  push:
   pull_request:
 
 permissions:
@@ -23,4 +24,5 @@ jobs:
         run: |
           python -m ruff check .
           python shared/scripts/validate_pillar_records.py --root .
+          python shared/scripts/validate_datasets.py
           python -m pytest -q

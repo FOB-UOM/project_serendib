@@ -14,6 +14,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: OCR batch stub
+      - name: Install dependencies
         run: |
-          python shared/ocr-pipeline/cli.py sample_scan --mode auto
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+      - name: OCR batch confidence loop
+        run: |
+          python shared/ocr-pipeline/batch.py --incoming shared/ocr-pipeline/incoming --threshold 0.7

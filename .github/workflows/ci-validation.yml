@@ -22,4 +22,5 @@ jobs:
       - name: Lint + tests
         run: |
           python -m ruff check .
+          python shared/scripts/validate_pillar_records.py --root .
           python -m pytest -q

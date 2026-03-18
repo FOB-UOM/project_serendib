@@ -12,6 +12,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
       - name: Structure sanity checks
         run: |
           test -d pillar-education-human-development
@@ -19,4 +26,7 @@ jobs:
           test -d pillar-society-environment
           test -d shared/ocr-pipeline
           test -f PROPOSAL-v2.md
-          echo "Quality gate stub passed"
+          test -f platform/api.py
+          test -f docs/PRODUCTION-AUDIT.md
+          python shared/scripts/validate_pillar_records.py --root .
+          echo "Quality gate passed"

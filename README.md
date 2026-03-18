@@ -40,8 +40,22 @@ Sub-pillars:
 - `shared/argilla/infra/` — contributor accounts, events, and badge state
 - `shared/argilla/infra/public_tasks.json` — standalone public task catalog
 - `shared/argilla/infra/public_submissions.json` — layperson submissions store
+- `shared/argilla/infra/moderation_queue.json` — moderation workflow artifact
 - `platform/app.py` — full Streamlit platform app (overview, explorer, OCR, public tasks, accounts/badges, roadmap)
 - `platform/api.py` — production-baseline API for accounts/events/leaderboard
+- `platform/persistence.py` — SQLite persistence layer for API/web app operations
+
+## Data Contracts and Seed Datasets
+
+Each sub-pillar now includes:
+- `record.schema.json` (JSON Schema data contract)
+- `seed.sample.jsonl` (starter sample dataset record)
+
+Validate all sub-pillar samples with:
+
+```bash
+python shared/scripts/validate_pillar_records.py --root .
+```
 
 ## How to Add a New Pillar in the Future
 
@@ -66,6 +80,10 @@ Architectural progress, remaining work, and the 90-day plan are tracked in
 
 Production readiness audit and hardening gaps are tracked in
 [docs/PRODUCTION-AUDIT.md](docs/PRODUCTION-AUDIT.md).
+
+Pilot execution and deployment hardening references:
+- [docs/PILOT-PROGRAMS.md](docs/PILOT-PROGRAMS.md)
+- [docs/DEPLOYMENT-HARDENING.md](docs/DEPLOYMENT-HARDENING.md)
 
 ## Continuity Note
 

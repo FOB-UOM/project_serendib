@@ -47,6 +47,8 @@ Project Serendib v2 is designed to grow.
 - Keep reusable automation in `shared/scripts/`.
 - Keep OCR-related enhancements inside `shared/ocr-pipeline/`.
 - For contributor operations, use the gamification tooling in `shared/scripts/gamification_cli.py`.
+- For dataset contributions, follow each sub-pillar `record.schema.json` contract.
+- Public submissions must pass moderation before canonical export.
 
 ## Code of Conduct
 

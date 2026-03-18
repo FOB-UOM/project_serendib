@@ -9,12 +9,21 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 import streamlit as st
+from persistence import (
+    connect,
+    db_stats,
+    init_db,
+    insert_public_submission,
+    list_public_submissions,
+)
 
 st.set_page_config(page_title="Project Serendib v2 Platform", page_icon="🌱", layout="wide")
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 PUBLIC_TASKS_PATH = REPO_ROOT / "shared" / "argilla" / "infra" / "public_tasks.json"
 PUBLIC_SUBMISSIONS_PATH = REPO_ROOT / "shared" / "argilla" / "infra" / "public_submissions.json"
+DB_CONN = connect()
+init_db(DB_CONN)
 
 PILLARS: dict[str, list[str]] = {
     "pillar-education-human-development": [
@@ -88,7 +97,23 @@ def save_json_list(path: Path, payload: list[dict[str, object]]) -> None:
 
 st.title("Project Serendib v2")
 st.caption("Sovereign Sinhala Data Ecosystem")
-st.write("This is a quiet, long-term faculty seed project.")
+language = st.sidebar.selectbox("Language", ["English", "සිංහල"], index=0)
+high_contrast = st.sidebar.checkbox("High contrast mode", value=False)
+if high_contrast:
+    st.markdown(
+        """
+<style>
+:root { color-scheme: light; }
+.block-container { background-color: #ffffff; color: #111111; }
+</style>
+""",
+        unsafe_allow_html=True,
+    )
+
+if language == "සිංහල":
+    st.write("මෙය දිගුකාලීන පීඨ මූලික ව්‍යාපෘතියකි.")
+else:
+    st.write("This is a quiet, long-term faculty seed project.")
 
 with st.sidebar:
     st.header("Platform Navigation")
@@ -99,6 +124,7 @@ with st.sidebar:
             "Pillar Explorer",
             "OCR Workbench",
             "Public Task Studio",
+            "Operations Dashboard",
             "Accounts & Badges",
             "Contribution Desk",
             "Roadmap",
@@ -173,7 +199,7 @@ elif section == "Public Task Studio":
     st.caption("For school students, teachers, and citizens to contribute directly.")
 
     tasks = load_json_list(PUBLIC_TASKS_PATH)
-    submissions = load_json_list(PUBLIC_SUBMISSIONS_PATH)
+    submissions = list_public_submissions(DB_CONN)
 
     if not tasks:
         st.warning("No public tasks are currently configured.")
@@ -202,8 +228,8 @@ elif section == "Public Task Studio":
                     "self_rating": self_rating,
                     "submitted_at": datetime.now(timezone.utc).isoformat(),
                 }
-                submissions.append(submission)
-                save_json_list(PUBLIC_SUBMISSIONS_PATH, submissions)
+                submission_id = insert_public_submission(DB_CONN, submission)
+                submission["id"] = submission_id
                 st.success("Thank you! Your contribution has been recorded.")
 
     st.markdown("#### Recent Public Contributions")
@@ -218,9 +244,33 @@ elif section == "Public Task Studio":
                     "contributor": item.get("contributor_name", "Anonymous"),
                     "rating": item.get("self_rating", 3),
                     "submitted_at": item.get("submitted_at", "-"),
+                    "status": item.get("status", "pending"),
                 }
             )
         st.table(recent_rows)
+
+elif section == "Operations Dashboard":
+    st.subheader("Operations Dashboard")
+    stats_payload = db_stats(DB_CONN)
+    c1, c2, c3, c4 = st.columns(4)
+    c1.metric("Users", stats_payload["users"])
+    c2.metric("Events", stats_payload["events"])
+    c3.metric("Pending moderation", stats_payload["pending_submissions"])
+    c4.metric("Approved submissions", stats_payload["approved_submissions"])
+
+    denom = stats_payload["approved_submissions"] + stats_payload["rejected_submissions"]
+    quality_score = stats_payload["approved_submissions"] / denom if denom else 0.0
+    st.metric("Moderation quality score", f"{quality_score:.2%}")
+
+    st.markdown("#### Pillar dataset growth (seed + exported records)")
+    growth_rows = []
+    for path in sorted(REPO_ROOT.glob("pillar-*/**/*.jsonl")):
+        count = sum(1 for ln in path.read_text(encoding="utf-8").splitlines() if ln.strip())
+        growth_rows.append({"path": str(path.relative_to(REPO_ROOT)), "records": count})
+    if growth_rows:
+        st.table(growth_rows)
+    else:
+        st.info("No JSONL records found yet.")
 
 elif section == "Accounts & Badges":
     st.subheader("Contributor Accounts + Gamification")

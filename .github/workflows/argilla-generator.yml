@@ -11,7 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Argilla task generation stub
+      - name: Install dependencies
         run: |
-          echo "Argilla generation placeholder: wire shared/scripts pipeline here."
-          python shared/scripts/gamification_cli.py --state shared/argilla/infra/state.json leaderboard --top 5 || true
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+      - name: Build moderation queue and export approved
+        run: |
+          python shared/scripts/argilla_pipeline_cli.py build-queue
+          python shared/scripts/argilla_pipeline_cli.py export-approved

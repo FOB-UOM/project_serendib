@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import re
+import unicodedata
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -32,6 +33,9 @@ PLACEHOLDER_RE = re.compile(
     r"(placeholder|lorem ipsum|todo|sample text|replace me|write here)",
     re.IGNORECASE,
 )
+ZERO_WIDTH_RE = re.compile(r"[\u200B\u200E\u200F\u2060\uFEFF]")
+CONTROL_RE = re.compile(r"[\u0000-\u0008\u000B\u000C\u000E-\u001F]")
+SINHALA_RE = re.compile(r"[\u0D80-\u0DFF]")
 
 
 @dataclass
@@ -79,6 +83,33 @@ def validate_payload(payload: dict, path: Path, line_no: int) -> list[str]:
         issues.append(f"line {line_no}: title contains placeholder text")
     if isinstance(content, str) and PLACEHOLDER_RE.search(content):
         issues.append(f"line {line_no}: content contains placeholder text")
+
+    for field_name, value in (("title", title), ("content", content)):
+        if isinstance(value, str):
+            issues.extend(validate_unicode(field_name, value, line_no))
+
+    if isinstance(title, str) and not SINHALA_RE.search(title):
+        issues.append(f"line {line_no}: title must include Sinhala characters")
+    if isinstance(content, str) and not SINHALA_RE.search(content):
+        issues.append(f"line {line_no}: content must include Sinhala characters")
+
+    return issues
+
+
+def validate_unicode(field_name: str, text: str, line_no: int) -> list[str]:
+    issues: list[str] = []
+    normalized = unicodedata.normalize("NFC", text)
+    if normalized != text:
+        issues.append(f"line {line_no}: {field_name} should be NFC-normalized Unicode")
+
+    if "\ufffd" in text:
+        issues.append(f"line {line_no}: {field_name} contains Unicode replacement characters (�)")
+
+    if ZERO_WIDTH_RE.search(text):
+        issues.append(f"line {line_no}: {field_name} contains zero-width characters")
+
+    if CONTROL_RE.search(text):
+        issues.append(f"line {line_no}: {field_name} contains control characters")
 
     return issues
 

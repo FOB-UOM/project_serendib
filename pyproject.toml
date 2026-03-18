@@ -35,11 +35,6 @@ argilla = [
   "argilla>=2.4.0",
   "gradio>=4.44.0",
 ]
-platform = [
-  "streamlit>=1.55.0",
-  "fastapi>=0.115.2",
-  "uvicorn>=0.30.0",
-]
 
 [tool.ruff]
 line-length = 100
@@ -50,3 +45,4 @@ select = ["E", "F", "I", "B", "UP"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+

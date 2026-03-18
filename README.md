@@ -1,42 +1,17 @@
-# Project Serendib v2 — Sovereign Sinhala Data Ecosystem
+# Project Serendib — Sovereign Sinhala Data Ecosystem
 
 Truly Local at Heart. Multi-Type Open Corpus for Deep Local Intelligence & Adaptive AI.
 
 ## Core thesis
 
-Global models lack epistemic depth in Sinhala contexts. We solve this by creating a full multi-type open data foundation while organizing project work into clear faculty pillars.
+Global models lack epistemic depth in Sinhala contexts. We solve this by creating a full multi-type open data foundation:
 
 - Rich raw knowledge corpus for factual grounding and continued pre-training
 - High-quality instruction data for helpful, culturally aligned behavior
 - Bridging layers (reasoning/CoT, structured QA, etc.) for advanced intelligence
 - Student-powered curation flywheel that turns data work into education
 
-This is a quiet, long-term faculty seed project.
-
-## Pillar architecture (v2 overlay)
-
-### 1) Education & Human Development
-Path: `pillar-education-human-development/`
-
-Sub-pillars:
-- `teacher-empowerment/`
-- `philosophy-psychology-personality/`
-- `art-literature-culture/`
-
-### 2) Economy & Enterprise
-Path: `pillar-economy-enterprise/`
-
-Sub-pillars:
-- `business-sme-bpm/`
-- `finance-financial-literacy/`
-- `political-economy/`
-
-### 3) Society & Environment
-Path: `pillar-society-environment/`
-
-Sub-pillars:
-- `sociology-social-dynamics/`
-- `sustainability-climate/`
+Building on the original instruction-focused vision, we now expand to a full multi-type ecosystem for deeper intelligence. This work is **complementary to SinLLM lineage**, not competitive.
 
 ## Multi-type data layers
 
@@ -55,106 +30,85 @@ Sub-pillars:
 - **Layer 4 — Advanced Types (future stubs)** (`advanced/`)  
   Parallel Sinhala–English, preference data, tool-use traces, etc.
 
-## Shared platform layers
-
-- `shared/ocr-pipeline/` — hybrid OCR routing, batch confidence loop, improvement roadmap
-- `shared/argilla/` — shared curation touchpoint
-- `shared/argilla/infra/` — accounts/events/moderation/public-task stores
-- `shared/scripts/` — validation, release, and pipeline automation
-- `platform/app.py` — full Streamlit platform app
-- `platform/api.py` — production-baseline API with auth/RBAC and moderation flows
-- `platform/persistence.py` — SQLite persistence layer
-
-## Data contracts and seed datasets
-
-Each sub-pillar includes:
-- `record.schema.json` (contract with provenance + license fields)
-- `seed.sample.jsonl` and `dataset.v1.jsonl`
-- Multi-type seed files:
-  - `layer0.raw.jsonl`
-  - `layer1.instruction.jsonl`
-  - `layer2.reasoning.jsonl`
-  - `layer3.structured.jsonl`
-  - `layer4.advanced.jsonl`
-
-Validate all sub-pillar datasets:
-
-```bash
-python shared/scripts/validate_pillar_records.py --root .
-```
-
 ## Supporting infrastructure
 
-- `ocr-pipeline/` — original OCR starters
-- `synthetic-gen/` — synthetic generation support
-- `training/` — Unsloth QLoRA training scripts
-- `argilla/` — labeling/verification task tooling
-- `evaluation/` — benchmark and evaluation scaffolding
+- `ocr-pipeline/` — Tesseract + TrOCR Sinhala OCR starters
+- `synthetic-gen/` — Bonito / LLaMA-Factory style synthetic generation (human verification required)
+- `training/` — Unsloth QLoRA scripts for instruction + continued-pretrain (mixed training later)
+- `argilla/` — gamified student verification tasks + leaderboard scaffolding
+- `evaluation/` — Sri Lankan cultural benchmark + custom eval set scaffolding
 - `notebooks/` — Colab-friendly examples
 
 ## Phased deliverables
 
-- **v0.1 Pilot (1–3 months)**: seed datasets + moderation loop + validation baseline
-- **v1.0 Depth (3–9 months)**: stronger raw corpus and curation throughput
-- **v2.0 Holistic Ecosystem (9–24 months)**: all layers active with community flywheel
+- **v0.1 Pilot (1–3 months)**: Layer 1 (instruction) + small `Lanka-Instruct-v1` on Qwen2.5-7B or SinLLM base (Lean-AI via LoRA/PEFT)
+- **v1.0 Depth (3–9 months)**: Add Layer 0 raw corpus + mixed training
+- **v2.0 Holistic Ecosystem (9–24 months)**: All layers live with 100+ student contributors
 
-## Quick-start
+## Quick-start (students & researchers)
 
-### Install
-
-```bash
-python -m pip install -r requirements.txt
-```
-
-### Validate instruction dataset sample
+### Install (recommended: venv)
 
 ```bash
-python instruction/validate_dataset.py --input instruction/hf_dataset_template/lanka_instruct_v1.sample.jsonl
+python -m venv .venv
+.\.venv\Scripts\activate
+pip install -r requirements.txt
 ```
 
-### Validate pillar contracts and data files
+### Validate an instruction JSONL file
 
 ```bash
-python shared/scripts/validate_pillar_records.py --root .
+python instruction\validate_dataset.py --input instruction\hf_dataset_template\lanka_instruct_v1.sample.jsonl
 ```
 
-### Run tests
+### Train (baseline) with Unsloth QLoRA (instruction)
 
 ```bash
-python -m pytest -q
+python training\train_unsloth_qlora.py --dataset instruction\hf_dataset_template\lanka_instruct_v1.sample.jsonl
 ```
 
-## GitHub Actions automation (dataset iteration)
+## Student contribution guide (Argilla gamification)
 
-We can automate dataset progression and reporting via Actions:
-- contract validation
-- moderation queue artifact generation
-- release quality report generation
+Start here: `CONTRIBUTING.md`.
 
-See:
-- [docs/GITHUB-ACTIONS-AUTOMATION.md](docs/GITHUB-ACTIONS-AUTOMATION.md)
-- `.github/workflows/dataset-iteration.yml`
+Fast onboarding:
 
-## Proposal and continuity
+- **Verify 10 examples → earn badge + credit** (Argilla verification queue)
+- **Fix 5 flagged issues → earn curator credit** (formatting/provenance/safety)
+- **Add 10 eval prompts → earn evaluator credit** (cultural benchmark growth)
 
-- Full v2 proposal: [PROPOSAL-v2.md](PROPOSAL-v2.md)
-- Prior proposal artifacts remain preserved (`PROPOSAL.md`, OCR extracts)
+Credits (typical):
 
-## Execution references
+- **Verifier (1–3 credits)**: label quality, safety, language, relevance in Argilla
+- **Curator (3–8 credits)**: improve records, add metadata/provenance, fix schema
+- **Evaluator (3–8 credits)**: add evaluation prompts, run baselines, report regressions
+- **Maintainer (8+ credits)**: review PRs, manage releases, update schema/process
 
-- [docs/EXECUTION-ROADMAP-v2.md](docs/EXECUTION-ROADMAP-v2.md)
-- [docs/PRODUCTION-AUDIT.md](docs/PRODUCTION-AUDIT.md)
-- [docs/PILOT-PROGRAMS.md](docs/PILOT-PROGRAMS.md)
-- [docs/DEPLOYMENT-HARDENING.md](docs/DEPLOYMENT-HARDENING.md)
+Badges (maintainers may award):
 
-## How to add a new pillar in the future
+- **Bronze** (10 credits), **Silver** (25), **Gold** (50), **Platinum** (100)
+- **Domain Specialist** (education, SME regs, history, etc.)
+- **Language Champion** (Sinhala/Tamil/English)
+- **Safety Steward** (PII/safety triage excellence)
 
-1. Copy `future-pillars-template/pillar-name-template/`.
-2. Rename to `pillar-<new-domain>/`.
-3. Add visible sub-pillars and sub-pillar READMEs.
-4. Update links in this README, `CONTRIBUTING.md`, and `platform/app.py`.
+Opt-in credit roll: `CREDITS.md`.
 
-## License and public-good commitment
+## Tech stack (2026)
+
+- **Cursor** for contributor productivity and reviews
+- **Unsloth** for fast QLoRA/PEFT fine-tuning
+- **Argilla** for student labeling/verification + leaderboards
+- **Bonito / LLaMA-Factory style pipelines** for synthetic candidate generation
+- **Tesseract (Sinhala) + TrOCR** for OCR ingestion
+
+## Original proposal and continuity
+
+- **Original proposal (OCR transcription)**: `PROPOSAL.md`  
+- **OCR outputs**: `proposal_ocr.txt`, `proposal_extracted.md`  
+
+If you have the original proposal PDF, add it to the repo root as `PROPOSAL.pdf` and link it from this section.
+
+## License and public good commitment
 
 - **License**: MIT (`LICENSE`)
-- **Code of Conduct**: see `CODE_OF_CONDUCT.md`
+- **Code of conduct**: this project is a **national digital public good** for education and enterprise; contributors must follow `CODE_OF_CONDUCT.md` and avoid harmful content and PII.

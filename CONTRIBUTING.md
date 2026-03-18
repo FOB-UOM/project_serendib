@@ -1,55 +1,82 @@
-# Contributing to Project Serendib v2
+# Contributing to Project Serendib
 
-Thank you for contributing to this long-term faculty public-good project.
+Thanks for helping build **Project Serendib — Sovereign Sinhala Data Ecosystem** at University of Moratuwa (FOB-UOM).
 
-## Contribution Model (3 Pillars + Shared Layer)
+This project is a **digital public good**. Please read `CODE_OF_CONDUCT.md` first.
 
-Work should be organized under one of the three main pillars:
+## Student onboarding (fast path)
 
-1. `pillar-education-human-development/`
-2. `pillar-economy-enterprise/`
-3. `pillar-society-environment/`
+If you’re new, start with verification:
 
-Each pillar contains visible sub-pillars. Contribute inside the most specific sub-pillar possible.
+- **Step 1**: Join the Argilla verification queue in `argilla/`
+- **Step 2**: **Verify 10 examples** (quality + safety + language + domain tags)
+- **Reward**: earn your **first badge** + credits; opt-in to be listed in `CREDITS.md`
 
-Shared and cross-pillar work belongs in:
-- `shared/ocr-pipeline/`
-- `shared/argilla/`
-- `shared/argilla/infra/`
-- `shared/scripts/`
-- `platform/`
+## Gamified roles (credits & badges)
 
-## How Students Should Contribute
+Credits are awarded for validated work (typical ranges):
 
-- Keep changes small and well-scoped.
-- Preserve old content and add new content incrementally.
-- Use clear filenames and concise commit messages.
-- Add references/sources for factual or policy content.
-- Do not include private or sensitive personal data.
+- **Verifier (1–3 credits)**: approve/reject, tag issues, mark PII/harm, domain/language
+- **Curator (3–8 credits)**: fix issues, improve clarity, add provenance, ensure schema-valid
+- **Evaluator (3–8 credits)**: add cultural benchmark prompts, run baselines, report regressions
+- **Maintainer (8+ credits)**: review PRs, manage releases, evolve schemas and workflows
 
-## Adding a New Pillar (Future Expansion)
+Badges (maintainers may award):
 
-Project Serendib v2 is designed to grow.
+- **Bronze** (10 credits), **Silver** (25), **Gold** (50), **Platinum** (100)
+- **Domain Specialist**, **Language Champion**, **Safety Steward**
 
-1. Copy `future-pillars-template/pillar-name-template/`.
-2. Rename it to `pillar-<domain-name>/`.
-3. Create/rename sub-pillars to clearly represent scope.
-4. Add a pillar-level `README.md` and sub-pillar `README.md` files.
-5. Update links and navigation in:
-   - root `README.md`
-   - `platform/app.py`
-   - relevant workflow/config docs if needed
+## What you can contribute
 
-## Quality Expectations
+- **Layer 0 (`corpus-raw/`)**: curated raw Sinhala text + provenance/metadata
+- **Layer 1 (`instruction/`)**: multi-turn dialogues (HF-friendly JSONL)
+- **Layer 2 (`reasoning/`)**: step-by-step explanations (structured artifacts)
+- **Layer 3 (`structured/`)**: QA, summarization, entity extraction (esp. education/law)
+- **Layer 4 (`advanced/`)**: templates for future advanced types
+- **Tooling**: validators, OCR utilities, synthetic-gen scripts, CI
+- **Evaluation**: Sri Lankan cultural benchmark prompts + harness improvements
 
-- Follow repository lint/test checks before opening a PR.
-- Keep folder names descriptive and stable.
-- Keep reusable automation in `shared/scripts/`.
-- Keep OCR-related enhancements inside `shared/ocr-pipeline/`.
-- For contributor operations, use the gamification tooling in `shared/scripts/gamification_cli.py`.
-- For dataset contributions, follow each sub-pillar `record.schema.json` contract.
-- Public submissions must pass moderation before canonical export.
+## Repo layout (high level)
 
-## Code of Conduct
+- `corpus-raw/` — Layer 0
+- `instruction/` — Layer 1 (includes schema + validator)
+- `reasoning/` — Layer 2
+- `structured/` — Layer 3
+- `advanced/` — Layer 4
+- `ocr-pipeline/`, `synthetic-gen/`, `training/`, `argilla/`, `evaluation/`, `notebooks/`
 
-By participating, you agree to follow [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
+## Development setup
+
+```bash
+python -m venv .venv
+.\.venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+Run checks:
+
+```bash
+ruff check .
+pytest -q
+```
+
+## Contribution workflow (PRs)
+
+1. **Pick an issue** (see `.github/ISSUE_TEMPLATE/`)
+2. **Create a branch**: `git checkout -b student/<your-handle>/<short-topic>`
+3. **Make small, reviewable changes** (data and/or code)
+4. **Validate locally** (when adding instruction JSONL):
+
+```bash
+python instruction\validate_dataset.py --input <your-file>.jsonl
+```
+
+5. **Open a PR** with:
+   - a short summary
+   - what layer(s) you touched
+   - a test plan (commands you ran)
+
+## Credits (opt-in)
+
+Add yourself to `CREDITS.md` in your PR (optional).
+

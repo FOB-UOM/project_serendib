@@ -7,6 +7,12 @@ from fastapi.testclient import TestClient
 REPO_ROOT = Path(__file__).resolve().parents[1]
 API_PATH = REPO_ROOT / "platform" / "api.py"
 sys.path.insert(0, str(REPO_ROOT / "platform"))
+COMMUNITY_EXPORT_PATH = (
+    REPO_ROOT
+    / "pillar-education-human-development"
+    / "teacher-empowerment"
+    / "community.approved.jsonl"
+)
 
 
 spec = importlib.util.spec_from_file_location("platform_api", API_PATH)
@@ -22,6 +28,8 @@ def setup_function() -> None:
     platform_api._CONN.execute("DELETE FROM users")
     platform_api._CONN.execute("DELETE FROM public_submissions")
     platform_api._CONN.commit()
+    if COMMUNITY_EXPORT_PATH.exists():
+        COMMUNITY_EXPORT_PATH.unlink()
 
 
 def test_health_endpoint_ok():

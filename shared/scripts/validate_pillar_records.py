@@ -42,12 +42,11 @@ def main() -> None:
     total_invalid = 0
 
     for schema_path in schema_paths:
-        jsonl_path = schema_path.with_name("seed.sample.jsonl")
-        if not jsonl_path.exists():
-            continue
-        valid, invalid = validate_file(schema_path, jsonl_path)
-        total_valid += valid
-        total_invalid += invalid
+        jsonl_paths = sorted(schema_path.parent.glob("*.jsonl"))
+        for jsonl_path in jsonl_paths:
+            valid, invalid = validate_file(schema_path, jsonl_path)
+            total_valid += valid
+            total_invalid += invalid
 
     print(f"Validated records: valid={total_valid}, invalid={total_invalid}")
     if total_invalid > 0:

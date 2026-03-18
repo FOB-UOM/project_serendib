@@ -1,13 +1,19 @@
-# Project Serendib v2
+# Project Serendib v2 — Sovereign Sinhala Data Ecosystem
 
-**Sovereign Sinhala Data Ecosystem**  
-**Truly Local at Heart.**
+Truly Local at Heart. Multi-Type Open Corpus for Deep Local Intelligence & Adaptive AI.
 
-Project Serendib v2 is a modular, long-horizon faculty initiative organized around three visible pillars and a shared infrastructure layer for OCR, curation, and automation.
+## Core thesis
+
+Global models lack epistemic depth in Sinhala contexts. We solve this by creating a full multi-type open data foundation while organizing project work into clear faculty pillars.
+
+- Rich raw knowledge corpus for factual grounding and continued pre-training
+- High-quality instruction data for helpful, culturally aligned behavior
+- Bridging layers (reasoning/CoT, structured QA, etc.) for advanced intelligence
+- Student-powered curation flywheel that turns data work into education
 
 This is a quiet, long-term faculty seed project.
 
-## Pillar Architecture
+## Pillar architecture (v2 overlay)
 
 ### 1) Education & Human Development
 Path: `pillar-education-human-development/`
@@ -32,59 +38,123 @@ Sub-pillars:
 - `sociology-social-dynamics/`
 - `sustainability-climate/`
 
-## Shared Platform Layers
+## Multi-type data layers
 
-- `shared/ocr-pipeline/` — hybrid OCR routing and improvement roadmap
+- **Layer 0 — Raw Pre-Training Corpus** (`corpus-raw/`)  
+  Deepest driver of local factual grounding: books, historical documents, laws, newspapers, manuscripts (with provenance + licensing).
+
+- **Layer 1 — Instruction Dataset** (`instruction/`)  
+  Multi-turn dialogues in focus domains (deliverable-first).
+
+- **Layer 2 — Reasoning & “Chain-of-Thought”** (`reasoning/`)  
+  Step-by-step explanations and reasoning traces (stored as structured artifacts; see layer README).
+
+- **Layer 3 — Domain-Specific Structured Data** (`structured/`)  
+  QA pairs, summarization, entity extraction, especially for laws & education.
+
+- **Layer 4 — Advanced Types (future stubs)** (`advanced/`)  
+  Parallel Sinhala–English, preference data, tool-use traces, etc.
+
+## Shared platform layers
+
+- `shared/ocr-pipeline/` — hybrid OCR routing, batch confidence loop, improvement roadmap
 - `shared/argilla/` — shared curation touchpoint
-- `shared/scripts/` — shared automation scripts
-- `shared/argilla/infra/` — contributor accounts, events, and badge state
-- `shared/argilla/infra/public_tasks.json` — standalone public task catalog
-- `shared/argilla/infra/public_submissions.json` — layperson submissions store
-- `shared/argilla/infra/moderation_queue.json` — moderation workflow artifact
-- `platform/app.py` — full Streamlit platform app (overview, explorer, OCR, public tasks, accounts/badges, roadmap)
-- `platform/api.py` — production-baseline API for accounts/events/leaderboard
-- `platform/persistence.py` — SQLite persistence layer for API/web app operations
+- `shared/argilla/infra/` — accounts/events/moderation/public-task stores
+- `shared/scripts/` — validation, release, and pipeline automation
+- `platform/app.py` — full Streamlit platform app
+- `platform/api.py` — production-baseline API with auth/RBAC and moderation flows
+- `platform/persistence.py` — SQLite persistence layer
 
-## Data Contracts and Seed Datasets
+## Data contracts and seed datasets
 
-Each sub-pillar now includes:
-- `record.schema.json` (JSON Schema data contract)
-- `seed.sample.jsonl` (starter sample dataset record)
+Each sub-pillar includes:
+- `record.schema.json` (contract with provenance + license fields)
+- `seed.sample.jsonl` and `dataset.v1.jsonl`
+- Multi-type seed files:
+  - `layer0.raw.jsonl`
+  - `layer1.instruction.jsonl`
+  - `layer2.reasoning.jsonl`
+  - `layer3.structured.jsonl`
+  - `layer4.advanced.jsonl`
 
-Validate all sub-pillar samples with:
+Validate all sub-pillar datasets:
 
 ```bash
 python shared/scripts/validate_pillar_records.py --root .
 ```
 
-## How to Add a New Pillar in the Future
+## Supporting infrastructure
 
-1. Copy `future-pillars-template/pillar-name-template/`.
-2. Rename the copied folder to `pillar-<new-domain>/`.
-3. Rename subfolders to meaningful sub-pillars.
-4. Add a short `README.md` inside each new sub-pillar describing scope and contribution format.
-5. Add links to the new pillar in:
-   - this root `README.md`
-   - `CONTRIBUTING.md`
-   - `platform/app.py`
-6. Keep `shared/` reusable and pillar-agnostic.
+- `ocr-pipeline/` — original OCR starters
+- `synthetic-gen/` — synthetic generation support
+- `training/` — Unsloth QLoRA training scripts
+- `argilla/` — labeling/verification task tooling
+- `evaluation/` — benchmark and evaluation scaffolding
+- `notebooks/` — Colab-friendly examples
 
-## Proposal v2
+## Phased deliverables
 
-See the full v2 proposal in [PROPOSAL-v2.md](PROPOSAL-v2.md).
+- **v0.1 Pilot (1–3 months)**: seed datasets + moderation loop + validation baseline
+- **v1.0 Depth (3–9 months)**: stronger raw corpus and curation throughput
+- **v2.0 Holistic Ecosystem (9–24 months)**: all layers active with community flywheel
 
-## Execution Roadmap
+## Quick-start
 
-Architectural progress, remaining work, and the 90-day plan are tracked in
-[docs/EXECUTION-ROADMAP-v2.md](docs/EXECUTION-ROADMAP-v2.md).
+### Install
 
-Production readiness audit and hardening gaps are tracked in
-[docs/PRODUCTION-AUDIT.md](docs/PRODUCTION-AUDIT.md).
+```bash
+python -m pip install -r requirements.txt
+```
 
-Pilot execution and deployment hardening references:
+### Validate instruction dataset sample
+
+```bash
+python instruction/validate_dataset.py --input instruction/hf_dataset_template/lanka_instruct_v1.sample.jsonl
+```
+
+### Validate pillar contracts and data files
+
+```bash
+python shared/scripts/validate_pillar_records.py --root .
+```
+
+### Run tests
+
+```bash
+python -m pytest -q
+```
+
+## GitHub Actions automation (dataset iteration)
+
+We can automate dataset progression and reporting via Actions:
+- contract validation
+- moderation queue artifact generation
+- release quality report generation
+
+See:
+- [docs/GITHUB-ACTIONS-AUTOMATION.md](docs/GITHUB-ACTIONS-AUTOMATION.md)
+- `.github/workflows/dataset-iteration.yml`
+
+## Proposal and continuity
+
+- Full v2 proposal: [PROPOSAL-v2.md](PROPOSAL-v2.md)
+- Prior proposal artifacts remain preserved (`PROPOSAL.md`, OCR extracts)
+
+## Execution references
+
+- [docs/EXECUTION-ROADMAP-v2.md](docs/EXECUTION-ROADMAP-v2.md)
+- [docs/PRODUCTION-AUDIT.md](docs/PRODUCTION-AUDIT.md)
 - [docs/PILOT-PROGRAMS.md](docs/PILOT-PROGRAMS.md)
 - [docs/DEPLOYMENT-HARDENING.md](docs/DEPLOYMENT-HARDENING.md)
 
-## Continuity Note
+## How to add a new pillar in the future
 
-Existing repository assets from earlier phases are intentionally preserved to ensure continuity while this architecture evolves.
+1. Copy `future-pillars-template/pillar-name-template/`.
+2. Rename to `pillar-<new-domain>/`.
+3. Add visible sub-pillars and sub-pillar READMEs.
+4. Update links in this README, `CONTRIBUTING.md`, and `platform/app.py`.
+
+## License and public-good commitment
+
+- **License**: MIT (`LICENSE`)
+- **Code of Conduct**: see `CODE_OF_CONDUCT.md`

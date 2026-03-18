@@ -111,6 +111,21 @@
       "type": "number",
       "minimum": 0,
       "maximum": 1
+    },
+    "data_layer": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4
+    },
+    "data_type": {
+      "type": "string",
+      "enum": [
+        "raw_corpus",
+        "instruction",
+        "reasoning",
+        "structured",
+        "advanced"
+      ]
     }
   }
 }

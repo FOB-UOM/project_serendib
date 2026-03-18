@@ -37,7 +37,11 @@ Sub-pillars:
 - `shared/ocr-pipeline/` — hybrid OCR routing and improvement roadmap
 - `shared/argilla/` — shared curation touchpoint
 - `shared/scripts/` — shared automation scripts
-- `platform/app.py` — minimal Streamlit entry door
+- `shared/argilla/infra/` — contributor accounts, events, and badge state
+- `shared/argilla/infra/public_tasks.json` — standalone public task catalog
+- `shared/argilla/infra/public_submissions.json` — layperson submissions store
+- `platform/app.py` — full Streamlit platform app (overview, explorer, OCR, public tasks, accounts/badges, roadmap)
+- `platform/api.py` — production-baseline API for accounts/events/leaderboard
 
 ## How to Add a New Pillar in the Future
 
@@ -54,6 +58,14 @@ Sub-pillars:
 ## Proposal v2
 
 See the full v2 proposal in [PROPOSAL-v2.md](PROPOSAL-v2.md).
+
+## Execution Roadmap
+
+Architectural progress, remaining work, and the 90-day plan are tracked in
+[docs/EXECUTION-ROADMAP-v2.md](docs/EXECUTION-ROADMAP-v2.md).
+
+Production readiness audit and hardening gaps are tracked in
+[docs/PRODUCTION-AUDIT.md](docs/PRODUCTION-AUDIT.md).
 
 ## Continuity Note
 

@@ -3,6 +3,9 @@ name: Argilla Generator
 on:
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   argilla-generator:
     runs-on: ubuntu-latest
@@ -11,3 +14,4 @@ jobs:
       - name: Argilla task generation stub
         run: |
           echo "Argilla generation placeholder: wire shared/scripts pipeline here."
+          python shared/scripts/gamification_cli.py --state shared/argilla/infra/state.json leaderboard --top 5 || true

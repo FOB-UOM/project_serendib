@@ -15,6 +15,7 @@ Each pillar contains visible sub-pillars. Contribute inside the most specific su
 Shared and cross-pillar work belongs in:
 - `shared/ocr-pipeline/`
 - `shared/argilla/`
+- `shared/argilla/infra/`
 - `shared/scripts/`
 - `platform/`
 
@@ -45,6 +46,7 @@ Project Serendib v2 is designed to grow.
 - Keep folder names descriptive and stable.
 - Keep reusable automation in `shared/scripts/`.
 - Keep OCR-related enhancements inside `shared/ocr-pipeline/`.
+- For contributor operations, use the gamification tooling in `shared/scripts/gamification_cli.py`.
 
 ## Code of Conduct
 

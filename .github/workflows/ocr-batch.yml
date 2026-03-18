@@ -3,6 +3,9 @@ name: OCR Batch
 on:
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   ocr-batch:
     runs-on: ubuntu-latest

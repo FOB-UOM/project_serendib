@@ -3,6 +3,9 @@ name: HF Sync
 on:
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   hf-sync:
     runs-on: ubuntu-latest

@@ -39,3 +39,10 @@ ruff>=0.6.0
 # Argilla / Gradio (optional; used for data labeling and demos).
 argilla>=2.4.0
 gradio>=4.44.0
+
+# Platform UI (optional; required for platform/app.py).
+streamlit>=1.55.0
+
+# Platform API (optional; required for platform/api.py).
+fastapi>=0.115.2
+uvicorn>=0.30.0

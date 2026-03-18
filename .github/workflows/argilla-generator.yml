@@ -1,0 +1,13 @@
+name: Argilla Generator
+
+on:
+  workflow_dispatch:
+
+jobs:
+  argilla-generator:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Argilla task generation stub
+        run: |
+          echo "Argilla generation placeholder: wire shared/scripts pipeline here."

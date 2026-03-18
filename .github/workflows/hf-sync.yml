@@ -1,0 +1,13 @@
+name: HF Sync
+
+on:
+  workflow_dispatch:
+
+jobs:
+  hf-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Hugging Face sync stub
+        run: |
+          echo "HF sync placeholder: add tokenized sync logic later."

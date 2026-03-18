@@ -1,0 +1,22 @@
+﻿{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Project Serendib Sub-Pillar Record",
+  "type": "object",
+  "required": [
+    "record_id",
+    "pillar",
+    "sub_pillar",
+    "title",
+    "content",
+    "language"
+  ],
+  "properties": {
+    "record_id": {"type": "string"},
+    "pillar": {"type": "string"},
+    "sub_pillar": {"type": "string"},
+    "title": {"type": "string"},
+    "content": {"type": "string"},
+    "language": {"type": "string", "enum": ["si"]}
+  },
+  "additionalProperties": false
+}

@@ -1,160 +1,87 @@
-# Project Serendib v2 — Sovereign Sinhala Data Ecosystem
+﻿# Project Serendib v2 - Sovereign Sinhala Data Ecosystem
 
-Truly Local at Heart. Multi-Type Open Corpus for Deep Local Intelligence & Adaptive AI.
+Project Serendib v2 builds a Sinhala-first, open, production-grade data ecosystem for local intelligence.
 
-## Core thesis
+## Vision
 
-Global models lack epistemic depth in Sinhala contexts. We solve this by creating a full multi-type open data foundation while organizing project work into clear faculty pillars.
+- Build culturally grounded Sinhala datasets for education, economy, and society.
+- Keep quality high through structured layers, validation, and contributor workflows.
+- Enable student and teacher participation at national scale.
 
-- Rich raw knowledge corpus for factual grounding and continued pre-training
-- High-quality instruction data for helpful, culturally aligned behavior
-- Bridging layers (reasoning/CoT, structured QA, etc.) for advanced intelligence
-- Student-powered curation flywheel that turns data work into education
+## Pillar Map (Visible + Actionable)
 
-This is a quiet, long-term faculty seed project.
-
-## Pillar architecture (v2 overlay)
-
-### 1) Education & Human Development
+### 1) Education & Human Development | අධ්‍යාපන හා මානව සංවර්ධනය
 Path: `pillar-education-human-development/`
 
-Sub-pillars:
-- `teacher-empowerment/`
-- `philosophy-psychology-personality/`
-- `art-literature-culture/`
+- `teacher-empowerment/` - Classroom practice and teacher support. | පන්තිකාමර ක්‍රියාකාරීත්වය සහ ගුරු සහාය.
+- `philosophy-psychology-personality/` - Mindset, ethics, wellbeing, and character. | මනෝභාවය, නීතිමය සිතුවිලි, සුවතාව හා චරිත වර්ධනය.
+- `art-literature-culture/` - Sinhala arts, literature, and cultural continuity. | සිංහල කලා, සාහිත්‍ය හා සංස්කෘතික අඛණ්ඩතාව.
 
-### 2) Economy & Enterprise
+### 2) Economy & Enterprise | ආර්ථිකය හා ව්‍යවසාය
 Path: `pillar-economy-enterprise/`
 
-Sub-pillars:
-- `business-sme-bpm/`
-- `finance-financial-literacy/`
-- `political-economy/`
+- `business-sme-bpm/` - SME growth, process quality, and operations. | කුඩා ව්‍යාපාර වර්ධනය, ක්‍රියාවලි ගුණාත්මකභාවය සහ මෙහෙයුම්.
+- `finance-financial-literacy/` - Household finance and practical money literacy. | ගෘහ මූල්‍ය කළමනාකරණය සහ ප්‍රායෝගික මුදල් දැනුම.
+- `political-economy/` - Policy, budgets, and public-economy behavior. | ප්‍රතිපත්ති, අයවැය සහ මහජන ආර්ථික හැසිරීම්.
 
-### 3) Society & Environment
+### 3) Society & Environment | සමාජය හා පරිසරය
 Path: `pillar-society-environment/`
 
-Sub-pillars:
-- `sociology-social-dynamics/`
-- `sustainability-climate/`
+- `sociology-social-dynamics/` - Community trust, inclusion, and social behavior. | ප්‍රජා විශ්වාසය, ඇතුළත්භාවය සහ සමාජ ගතිකතා.
+- `sustainability-climate/` - Climate resilience and sustainability practices. | දේශගුණ තිරසාරභාවය සහ පරිසර හිතකාමී ක්‍රියාමාර්ග.
 
-## Multi-type data layers
+## Data Layers
 
-- **Layer 0 — Raw Pre-Training Corpus** (`corpus-raw/`)  
-  Deepest driver of local factual grounding: books, historical documents, laws, newspapers, manuscripts (with provenance + licensing).
+- `layer0-raw` - Raw source material and base knowledge.
+- `layer1-instruction` - Sinhala instruction-response records.
+- `layer2-reasoning` - Reasoning traces and logic-heavy records.
+- `layer3-structured` - Structured QA and domain schema data.
+- `layer4-advanced` - Advanced future data types.
 
-- **Layer 1 — Instruction Dataset** (`instruction/`)  
-  Multi-turn dialogues in focus domains (deliverable-first).
+## Platform + Shared Ops
 
-- **Layer 2 — Reasoning & “Chain-of-Thought”** (`reasoning/`)  
-  Step-by-step explanations and reasoning traces (stored as structured artifacts; see layer README).
+- `platform/app.py` - Bilingual landing page for pillar discovery and contribution entry.
+- `shared/scripts/validate_datasets.py` - Enforces layer1 quality rules.
+- `shared/argilla/config.yaml` - Argilla task templates for all sub-pillars.
+- `future-pillars-template/` - Copy-ready scaffold for adding future pillars.
 
-- **Layer 3 — Domain-Specific Structured Data** (`structured/`)  
-  QA pairs, summarization, entity extraction, especially for laws & education.
+## How to Contribute (School Kids + Teachers)
 
-- **Layer 4 — Advanced Types (future stubs)** (`advanced/`)  
-  Parallel Sinhala–English, preference data, tool-use traces, etc.
+### For school kids
 
-## Shared platform layers
+1. Pick a sub-pillar you understand (example: `finance-financial-literacy`).
+2. Read existing `layer1-instruction/records.v1.jsonl` samples.
+3. Add a new Sinhala record with clear, useful, real-world content.
+4. Keep `language` as `si` and avoid placeholders.
+5. Ask your teacher to review before submission.
 
-- `shared/ocr-pipeline/` — hybrid OCR routing, batch confidence loop, improvement roadmap
-- `shared/argilla/` — shared curation touchpoint
-- `shared/argilla/infra/` — accounts/events/moderation/public-task stores
-- `shared/scripts/` — validation, release, and pipeline automation
-- `platform/app.py` — full Streamlit platform app
-- `platform/api.py` — production-baseline API with auth/RBAC and moderation flows
-- `platform/persistence.py` — SQLite persistence layer
+### For teachers
 
-## Data contracts and seed datasets
-
-Each sub-pillar includes:
-- `record.schema.json` (contract with provenance + license fields)
-- `seed.sample.jsonl` and `dataset.v1.jsonl`
-- Multi-type seed files:
-  - `layer0.raw.jsonl`
-  - `layer1.instruction.jsonl`
-  - `layer2.reasoning.jsonl`
-  - `layer3.structured.jsonl`
-  - `layer4.advanced.jsonl`
-
-Validate all sub-pillar datasets:
+1. Assign each student group to one sub-pillar topic.
+2. Review records for clarity, factual quality, and safe language.
+3. Ensure schema format is correct and records are unique.
+4. Run validation locally:
 
 ```bash
-python shared/scripts/validate_pillar_records.py --root .
+python shared/scripts/validate_datasets.py
 ```
 
-## Supporting infrastructure
+5. Submit changes through your normal Git workflow.
 
-- `ocr-pipeline/` — original OCR starters
-- `synthetic-gen/` — synthetic generation support
-- `training/` — Unsloth QLoRA training scripts
-- `argilla/` — labeling/verification task tooling
-- `evaluation/` — benchmark and evaluation scaffolding
-- `notebooks/` — Colab-friendly examples
+## Validation + CI
 
-## Phased deliverables
-
-- **v0.1 Pilot (1–3 months)**: seed datasets + moderation loop + validation baseline
-- **v1.0 Depth (3–9 months)**: stronger raw corpus and curation throughput
-- **v2.0 Holistic Ecosystem (9–24 months)**: all layers active with community flywheel
-
-## Quick-start
-
-### Install
+- Local:
 
 ```bash
-python -m pip install -r requirements.txt
+python shared/scripts/validate_datasets.py
 ```
 
-### Validate instruction dataset sample
+- GitHub Actions: `.github/workflows/ci-validation.yml` runs validation on every push and pull request.
 
-```bash
-python instruction/validate_dataset.py --input instruction/hf_dataset_template/lanka_instruct_v1.sample.jsonl
-```
+## Proposal Link
 
-### Validate pillar contracts and data files
+- Core blueprint: [PROPOSAL-v2.md](PROPOSAL-v2.md)
 
-```bash
-python shared/scripts/validate_pillar_records.py --root .
-```
+## Future Expansion
 
-### Run tests
-
-```bash
-python -m pytest -q
-```
-
-## GitHub Actions automation (dataset iteration)
-
-We can automate dataset progression and reporting via Actions:
-- contract validation
-- moderation queue artifact generation
-- release quality report generation
-
-See:
-- [docs/GITHUB-ACTIONS-AUTOMATION.md](docs/GITHUB-ACTIONS-AUTOMATION.md)
-- `.github/workflows/dataset-iteration.yml`
-
-## Proposal and continuity
-
-- Full v2 proposal: [PROPOSAL-v2.md](PROPOSAL-v2.md)
-- Prior proposal artifacts remain preserved (`PROPOSAL.md`, OCR extracts)
-
-## Execution references
-
-- [docs/EXECUTION-ROADMAP-v2.md](docs/EXECUTION-ROADMAP-v2.md)
-- [docs/PRODUCTION-AUDIT.md](docs/PRODUCTION-AUDIT.md)
-- [docs/PILOT-PROGRAMS.md](docs/PILOT-PROGRAMS.md)
-- [docs/DEPLOYMENT-HARDENING.md](docs/DEPLOYMENT-HARDENING.md)
-
-## How to add a new pillar in the future
-
-1. Copy `future-pillars-template/pillar-name-template/`.
-2. Rename to `pillar-<new-domain>/`.
-3. Add visible sub-pillars and sub-pillar READMEs.
-4. Update links in this README, `CONTRIBUTING.md`, and `platform/app.py`.
-
-## License and public-good commitment
-
-- **License**: MIT (`LICENSE`)
-- **Code of Conduct**: see `CODE_OF_CONDUCT.md`
+To add a 4th pillar later, use `future-pillars-template/README.md` and copy `pillar-name-template/`.

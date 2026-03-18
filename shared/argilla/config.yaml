@@ -1,0 +1,81 @@
+﻿version: 1
+project: project-serendib-v2
+language: si
+argilla:
+  url: https://argilla.example.com
+  workspace: project-serendib-v2
+  note: Replace with production Argilla workspace URL and name.
+
+task_templates:
+  ocr_correction:
+    title_en: OCR Correction
+    title_si: OCR නිවැරදි කිරීම
+    instructions_en: Correct OCR text while preserving original meaning and Sinhala spelling.
+    instructions_si: OCR පෙළ අර්ථය වෙනස් නොකර නිවැරදි සිංහල අක්ෂර වින්‍යාසයෙන් සකසන්න.
+    fields:
+      - source_image
+      - ocr_text
+      - corrected_text
+      - confidence
+    guidelines:
+      - Keep names, dates, and numbers unchanged unless clearly wrong.
+      - Do not add new facts.
+      - Mark uncertain fragments explicitly.
+
+  instruction_verification:
+    title_en: Instruction Verification
+    title_si: උපදෙස් වාර්තා සත්‍යාපනය
+    instructions_en: Verify that instruction records are clear, safe, Sinhala-first, and factually grounded.
+    instructions_si: උපදෙස් වාර්තා පැහැදිලිද, ආරක්ෂිතද, සිංහල ප්‍රමුඛද, තත්‍යමයද යන්න පරීක්ෂා කරන්න.
+    fields:
+      - record_id
+      - instruction
+      - response
+      - quality_label
+      - reviewer_comment
+    guidelines:
+      - Reject placeholders or English-heavy content.
+      - Confirm that response follows instruction intent.
+      - Add concise reviewer feedback when rejected.
+
+  reasoning_task:
+    title_en: Reasoning Quality Review
+    title_si: තර්කන ගුණාත්මක සමාලෝචනය
+    instructions_en: Evaluate reasoning chains for coherence, correctness, and culturally grounded examples.
+    instructions_si: තර්කන දාම සම්බන්ධතාව, නිවැරදි බව සහ සංස්කෘතික ගැළපීම අනුව ඇගයන්න.
+    fields:
+      - problem
+      - reasoning_steps
+      - final_answer
+      - quality_label
+      - reviewer_comment
+    guidelines:
+      - Check step-by-step logical continuity.
+      - Flag unsupported conclusions.
+      - Ensure examples stay relevant to Sri Lankan Sinhala context.
+
+sub_pillars:
+  - id: business-sme-bpm
+    pillar: pillar-economy-enterprise
+    tasks: [ocr_correction, instruction_verification, reasoning_task]
+  - id: finance-financial-literacy
+    pillar: pillar-economy-enterprise
+    tasks: [ocr_correction, instruction_verification, reasoning_task]
+  - id: political-economy
+    pillar: pillar-economy-enterprise
+    tasks: [ocr_correction, instruction_verification, reasoning_task]
+  - id: teacher-empowerment
+    pillar: pillar-education-human-development
+    tasks: [ocr_correction, instruction_verification, reasoning_task]
+  - id: philosophy-psychology-personality
+    pillar: pillar-education-human-development
+    tasks: [ocr_correction, instruction_verification, reasoning_task]
+  - id: art-literature-culture
+    pillar: pillar-education-human-development
+    tasks: [ocr_correction, instruction_verification, reasoning_task]
+  - id: sociology-social-dynamics
+    pillar: pillar-society-environment
+    tasks: [ocr_correction, instruction_verification, reasoning_task]
+  - id: sustainability-climate
+    pillar: pillar-society-environment
+    tasks: [ocr_correction, instruction_verification, reasoning_task]

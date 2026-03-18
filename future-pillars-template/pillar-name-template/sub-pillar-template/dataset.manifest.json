@@ -1,0 +1,13 @@
+﻿{
+  "version": "v1",
+  "pillar": "pillar-name-template",
+  "sub_pillar": "sub-pillar-template",
+  "language": "si",
+  "layers": [
+    "layer0-raw",
+    "layer1-instruction",
+    "layer2-reasoning",
+    "layer3-structured",
+    "layer4-advanced"
+  ]
+}

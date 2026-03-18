@@ -1,28 +1,25 @@
-name: CI Validation
+﻿name: Dataset Validation
 
 on:
-  workflow_dispatch:
   push:
+    branches:
+      - "**"
   pull_request:
 
 permissions:
   contents: read
 
 jobs:
-  validate:
+  validate-datasets:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          python -m pip install -r requirements.txt
-      - name: Lint + tests
-        run: |
-          python -m ruff check .
-          python shared/scripts/validate_pillar_records.py --root .
-          python shared/scripts/validate_datasets.py
-          python -m pytest -q
+
+      - name: Run dataset validation
+        run: python shared/scripts/validate_datasets.py

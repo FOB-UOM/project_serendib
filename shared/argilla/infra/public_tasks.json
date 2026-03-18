@@ -1,0 +1,23 @@
+[
+  {
+    "task_id": "ocr-001",
+    "pillar": "shared/ocr-pipeline",
+    "title": "Correct OCR text",
+    "prompt": "Fix the Sinhala OCR output for a scanned paragraph and submit the corrected version.",
+    "difficulty": "easy"
+  },
+  {
+    "task_id": "edu-001",
+    "pillar": "pillar-education-human-development/teacher-empowerment",
+    "title": "Lesson micro-idea",
+    "prompt": "Write a short, low-resource classroom activity idea for Grade 6 Science.",
+    "difficulty": "medium"
+  },
+  {
+    "task_id": "env-001",
+    "pillar": "pillar-society-environment/sustainability-climate",
+    "title": "Local sustainability tip",
+    "prompt": "Contribute one practical sustainability action a school can apply this month.",
+    "difficulty": "easy"
+  }
+]

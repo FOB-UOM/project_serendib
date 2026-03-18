@@ -1,0 +1,20 @@
+{
+  "pillar": "pillar-economy-enterprise",
+  "sub_pillar": "political-economy",
+  "layers": {
+    "layer0.raw.jsonl": 25,
+    "layer1.instruction.jsonl": 25,
+    "layer2.reasoning.jsonl": 25,
+    "layer3.structured.jsonl": 25,
+    "layer4.advanced.jsonl": 5
+  },
+  "total_records": 105,
+  "note": "Multi-type seed dataset aligned with Serendib v2 layers 0-4.",
+  "layer_paths": {
+    "layer0": "layer0-raw/records.v1.jsonl",
+    "layer1": "layer1-instruction/records.v1.jsonl",
+    "layer2": "layer2-reasoning/records.v1.jsonl",
+    "layer3": "layer3-structured/records.v1.jsonl",
+    "layer4": "layer4-advanced/records.v1.jsonl"
+  }
+}

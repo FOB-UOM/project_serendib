@@ -52,6 +52,7 @@ outputs/
 checkpoints/
 wandb/
 mlruns/
+*.db
 
 # Secrets
 .env
